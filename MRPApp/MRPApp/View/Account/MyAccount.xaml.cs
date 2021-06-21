@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WpfSMSApp.View.Account
+namespace MRPApp.View.Account
 {
     /// <summary>
     /// MyAccount.xaml에 대한 상호 작용 논리

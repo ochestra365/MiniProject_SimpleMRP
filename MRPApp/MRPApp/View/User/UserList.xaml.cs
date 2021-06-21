@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WpfSMSApp.View.User
+namespace MRPApp.View.User
 {
     /// <summary>
     /// MyAccount.xaml에 대한 상호 작용 논리
@@ -177,7 +177,7 @@ namespace WpfSMSApp.View.User
         {
             try
             {
-                List<WpfSMSApp.Model.User> users = new List<Model.User>();
+                List<MRPApp.Model.User> users = new List<Model.User>();
 
                 if (RdoAll.IsChecked == true) {
                     users = Logic.DataAccess.GetUsers();
@@ -195,7 +195,7 @@ namespace WpfSMSApp.View.User
         {
             try
             {
-                List<WpfSMSApp.Model.User> users = new List<Model.User>();
+                List<MRPApp.Model.User> users = new List<Model.User>();
 
                 if (RdoActive.IsChecked == true)
                 {
@@ -214,7 +214,7 @@ namespace WpfSMSApp.View.User
         {
             try
             {
-                List<WpfSMSApp.Model.User> users = new List<Model.User>();
+                List<MRPApp.Model.User> users = new List<Model.User>();
 
                 if (RdoDeactive.IsChecked == true)
                 {

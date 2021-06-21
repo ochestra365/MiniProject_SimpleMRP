@@ -6,9 +6,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfSMSApp.Model;
+using MRPApp.Model;
 
-namespace WpfSMSApp
+namespace MRPApp
 {
     public class Commons
     {

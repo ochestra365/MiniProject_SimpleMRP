@@ -14,12 +14,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfSMSApp.View;
-using WpfSMSApp.View.Account;
-using WpfSMSApp.View.Store;
-using WpfSMSApp.View.User;
+using MRPApp.View;
+using MRPApp.View.Account;
+using MRPApp.View.Store;
+using MRPApp.View.User;
 
-namespace WpfSMSApp
+namespace MRPApp
 {
     /// <summary>
     /// MainWindow.xaml에 대한 상호 작용 논리

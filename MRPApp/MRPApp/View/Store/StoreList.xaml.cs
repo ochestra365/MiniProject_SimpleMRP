@@ -12,7 +12,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WpfSMSApp.View.Store
+namespace MRPApp.View.Store
 {
     /// <summary>
     /// MyAccount.xaml에 대한 상호 작용 논리

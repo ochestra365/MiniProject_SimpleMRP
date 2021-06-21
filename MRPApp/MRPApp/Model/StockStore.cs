@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfSMSApp.Model
+namespace MRPApp.Model
 {
     public class StockStore : Store
     {

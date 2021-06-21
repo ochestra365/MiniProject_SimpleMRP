@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Input;
 
-namespace WpfSMSApp.View
+namespace MRPApp.View
 {
     /// <summary>
     /// LoginView.xaml에 대한 상호 작용 논리

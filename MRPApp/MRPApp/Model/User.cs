@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfSMSApp.Model
+namespace MRPApp.Model
 {
     using System;
     using System.Collections.Generic;

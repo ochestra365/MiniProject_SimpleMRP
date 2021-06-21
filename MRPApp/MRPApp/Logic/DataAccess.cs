@@ -4,9 +4,9 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfSMSApp.Model;
+using MRPApp.Model;
 
-namespace WpfSMSApp.Logic
+namespace MRPApp.Logic
 {
     public class DataAccess
     {

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using MahApps.Metro.Controls.Dialogs;
 
-namespace WpfSMSApp.View.Account
+namespace MRPApp.View.Account
 {
     /// <summary>
     /// MyAccount.xaml에 대한 상호 작용 논리
