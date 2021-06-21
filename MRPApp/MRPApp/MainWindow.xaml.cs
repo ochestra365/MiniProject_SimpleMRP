@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using MRPApp.View;
 using MRPApp.View.Account;
 using MRPApp.View.Store;
+using MRPApp.View.Setting;
 
 namespace MRPApp
 {
@@ -32,7 +33,6 @@ namespace MRPApp
 
         private void MetroWindow_ContentRendered(object sender, EventArgs e)
         {
-            ShowLoginView();
         }
 
         private void MetroWindow_Activated(object sender, EventArgs e)
@@ -40,24 +40,11 @@ namespace MRPApp
             /*if (Commons.LOGINED_USER != null)
                 BtnLoginedId.Content = $"{Commons.LOGINED_USER.UserEmail} ({Commons.LOGINED_USER.UserName})";*/
         }
-
-        private async void BtnLogOut_Click(object sender, RoutedEventArgs e)
+       
+        private async void BtnSchdule_Click(object sender, RoutedEventArgs e)
         {
-            // TODO : 모든 화면을 해제하고 첫화면으로 돌려놔야 함.
-
-            /*var result = await this.ShowMessageAsync("로그아웃", "로그아웃하시겠습니까?",
-                MessageDialogStyle.AffirmativeAndNegative, null);
-
-            if (result == MessageDialogResult.Affirmative)
-            {
-                Commons.LOGINED_USER = null; // 로그인했던 사용자 정보를 삭제
-                ShowLoginView();
-            }*/
-        }
-
-        private void ShowLoginView()
-        {
-            
+           
+           
         }
 
         private async void BtnAccount_Click(object sender, RoutedEventArgs e)
@@ -99,14 +86,28 @@ namespace MRPApp
             }
         }
 
-        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        private async void BtnExit_Click(object sender, RoutedEventArgs e)
         {
+            var result = await this.ShowMessageAsync("로그아웃", "로그아웃하시겠습니까?",
+                MessageDialogStyle.AffirmativeAndNegative, null);
 
+            if (result == MessageDialogResult.Affirmative)
+            {
+                Application.Current.Shutdown();
+            }
         }
 
-        private void BtnSchdule_Click(object sender, RoutedEventArgs e)
+        private void BtnSetting_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                ActiveControl.Content = new SettingList();
+            }
+            catch (Exception ex)
+            {
+                Commons.LOGGER.Error($"예외발생 BtnSetting_Click : {ex}");
+                this.ShowMessageAsync("예외", $"예외발생 : {ex}");
+            }
         }
     }
 }
