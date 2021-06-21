@@ -98,5 +98,10 @@ namespace MRPApp
                 this.ShowMessageAsync("예외", $"예외발생 : {ex}");
             }
         }
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
