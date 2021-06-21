@@ -48,7 +48,7 @@
             <Button x:Name="BtnMonitoring" 
                     Grid.Column="1" 
                     Content="공정모니터링" FontSize="16" 
-                    Foreground="White" Background="LightSkyBlue"
+                    Foreground="White" Background="Green"
                     Margin="5, 10">
                 <Button.ContentTemplate>
                     <DataTemplate>
@@ -63,12 +63,12 @@
             <Button x:Name="BtnReport" 
                     Grid.Column="2" 
                     Content="리포트" FontSize="16" 
-                    Foreground="White" Background="DodgerBlue"
+                    Foreground="White" Background="DarkViolet"
                     Margin="5, 10">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding}" Margin="2, 0" VerticalAlignment="Center" />
                             <iconPacks:PackIconUnicons Kind="FileGraph" Width="24" Height="24"/>
                         </StackPanel>
                     </DataTemplate>
@@ -78,7 +78,7 @@
             <Button x:Name="BtnSetting" 
                     Grid.Column="3" 
                     Content="설정" FontSize="16" 
-                    Foreground="White" Background="MidnightBlue"
+                    Foreground="White" Background="Orange"
                     Margin="5, 10">
                 <Button.ContentTemplate>
                     <DataTemplate>
