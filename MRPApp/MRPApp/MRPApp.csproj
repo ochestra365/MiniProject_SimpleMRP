@@ -201,21 +201,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Logic\DataAccess.cs" />
-    <Compile Include="Model\StockStore.cs" />
-    <Compile Include="View\Store\EditStore.xaml.cs">
-      <DependentUpon>EditStore.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Store\AddStore.xaml.cs">
       <DependentUpon>AddStore.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\User\DeactiveUser.xaml.cs">
-      <DependentUpon>DeactiveUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\User\EditUser.xaml.cs">
-      <DependentUpon>EditUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\User\AddUser.xaml.cs">
-      <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Account\EditAccount.xaml.cs">
       <DependentUpon>EditAccount.xaml</DependentUpon>
@@ -223,14 +210,8 @@
     <Compile Include="View\Store\StoreList.xaml.cs">
       <DependentUpon>StoreList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\User\UserList.xaml.cs">
-      <DependentUpon>UserList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Account\MyAccount.xaml.cs">
       <DependentUpon>MyAccount.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -245,23 +226,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Store\EditStore.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\Store\AddStore.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\User\DeactiveUser.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\User\EditUser.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\User\AddUser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -273,71 +238,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\User\UserList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\Account\MyAccount.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Antenna.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Barcode.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BookOut.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BookOutItem.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Brand.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Category.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Item.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Reader.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SMSModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SMSModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SMSModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SMSModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SMSModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Stock.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Store.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Tag.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\User.cs">
-      <DependentUpon>SMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -355,13 +261,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\SMSModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SMSModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\SMSModel.edmx.diagram">
-      <DependentUpon>SMSModel.edmx</DependentUpon>
-    </None>
     <None Include="NanumGothic.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -377,21 +276,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\SMSModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SMSModel.edmx</DependentUpon>
-      <LastGenOutput>SMSModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\SMSModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SMSModel.edmx</DependentUpon>
-      <LastGenOutput>SMSModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resources\stock.png" />
     <Resource Include="Resources\zip_file2.png" />
     <Resource Include="Resources\zip_file.png" />

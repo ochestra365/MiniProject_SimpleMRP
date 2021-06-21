@@ -6,7 +6,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
-using MRPApp.Model;
 
 namespace MRPApp
 {
@@ -16,7 +15,6 @@ namespace MRPApp
         public static readonly Logger LOGGER = LogManager.GetCurrentClassLogger();
 
         // 로그인한 유저 정보
-        public static User LOGINED_USER;        
 
         /// <summary>
         /// MD5 암호화처리 메서드

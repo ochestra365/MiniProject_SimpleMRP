@@ -41,13 +41,13 @@ namespace MRPApp.View.Store
             }
             else
             {
-                var cnt = Logic.DataAccess.GetStores().Where(u => u.StoreName.Equals(TxtStoreName.Text)).Count();
+               /* var cnt = Logic.DataAccess.GetStores().Where(u => u.StoreName.Equals(TxtStoreName.Text)).Count();
                 if (cnt > 0)
                 {
                     LblStoreName.Visibility = Visibility.Visible;
                     LblStoreName.Text = "중복된 창고명이 존재합니다";
                     IsValid = false;
-                }
+                }*/
             }
 
             if (string.IsNullOrEmpty(TxtStoreLocation.Text))
@@ -65,7 +65,7 @@ namespace MRPApp.View.Store
             bool isValid = true; // 입력된 값이 모두 만족하는지 판별하는 플래그
             LblStoreName.Visibility = LblStoreLocation.Visibility = Visibility.Hidden;
 
-            var store = new Model.Store();
+            /*var store = new Model.Store();
             isValid = IsValidInput(); // 유효성체크(필수)
 
             if (isValid)
@@ -93,7 +93,7 @@ namespace MRPApp.View.Store
                 {
                     Commons.LOGGER.Error($"예외발생 : {ex}");
                 }
-            }
+            }*/
         }
 
         private void TxtStoreName_LostFocus(object sender, RoutedEventArgs e)
