@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -20,6 +21,7 @@ namespace DeviceSubApp
         ulong lineCount;
         delegate void UpdateTextCallback(string message);//스레드상에서 윈폼 RichTextbox 텍스트를 출력할 때 필요한 것
 
+        Stopwatch sw = new Stopwatch();
         public FrmMain()
         {
             InitializeComponent();
@@ -43,6 +45,10 @@ namespace DeviceSubApp
             {
                 MessageBox.Show(ex.ToString());
             }
+            Timer.Enabled = true;
+            Timer.Interval = 1000;//1000ms-->1sec
+            Timer.Tick += Timer_Tick;
+            Timer.Start();
         }
 
         private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
@@ -51,12 +57,30 @@ namespace DeviceSubApp
             {
                 var message = Encoding.UTF8.GetString(e.Message);
                 UpdateText($">>>> 받은 메세지 : {message}");
+                //
+                sw.Stop();
+                sw.Reset();//다시 0으로 시작되게 함.
+                sw.Start();
             }
             catch (Exception ex)
             {
                 UpdateText($">>>>ERROR!! : {ex.Message}");
             }
+
+            
         }//메시지 박스가 뜨면 팝업이 뜨고 진행이 안됨.. 누가 닫아줘야 함. 에러메시지도 리치박스안에서 처리되야 함. 로그로 정상적으로 다 찍어줘야 함.
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            LblResult.Text = sw.Elapsed.Seconds.ToString();//elapsed??
+            if (sw.Elapsed.Seconds >= 3)
+            {
+                sw.Stop();
+                sw.Reset();
+                //TODO 실제 처리프로세스 실행
+                UpdateText("처리!!");
+            }
+        }
 
         private void BtnConnect_Click(object sender, EventArgs e)
         {
@@ -88,7 +112,8 @@ namespace DeviceSubApp
             }
             else
             {
-                RtbSubscr.AppendText(message + "\n");
+                lineCount++;
+                RtbSubscr.AppendText($"{lineCount} : {message}\n");
                 RtbSubscr.ScrollToCaret();//message log나 출력이 많이 되는 거를 대리자랑 업데이트 테스트를 많이 하게 된다. 그럼 별 문제 없이 시행된다.
             }
         }
