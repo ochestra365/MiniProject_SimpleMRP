@@ -109,10 +109,10 @@ namespace DeviceSubApp
                 {
                     var PrcResult = correctData["PRC_MSG"] == "OK" ? 1 : 0;
                     string strUpQry = $"UPDATE Process_DEV " +
-                                      $"  SET PrcEndTime = {DateTime.Now.ToShortTimeString()}" +
-                                      $"  , PrcResult = {PrcResult} " +
-                                      $"  , ModDate = {DateTime.Now} " +
-                                      $"  , ModID = {"SYS"} " +
+                                      $"  SET PrcEndTime = '{DateTime.Now.ToString("HH:mm:ss")}'" +
+                                      $"  , PrcResult = '{PrcResult}' " +
+                                      $"  , ModDate = '{DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")}' " +
+                                      $"  , ModID = '{"SYS"}' " +
                                       $"  WHERE PrcIdx =  " +
                                       $"  (SELECT TOP 1 PrcIdx FROM Process_DEV ORDER BY PrcIdx DESC)";
 
