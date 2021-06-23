@@ -105,15 +105,28 @@ namespace DeviceSubApp
                 var correctData = iotData[iotData.Count - 1];//딕셔너리 데이터
                 //DB에 입력한다.
                 //UpdateText("DB처리");
-                using (var conn = new SqlConnection(connectionString))
+                using (var conn = new SqlConnection(connectionString)) 
                 {
-                    string strUpQry = "UPDATE Process_DEV" +
-                                      "SET PrcEndTime = { }" +
-                                      ", PrcResult = { }" +
-                                      ", ModDate = { }" +
-                                      ", ModID = { }" +
-                                      "WHERE PrcIdx =" +
-                                      "(SELECT TOP 1 PrcIdx FROM Process_DEV ORDER BY PrcIdx DESC)";
+                    var PrcResult = correctData["PRC_MSG"] == "OK" ? 1 : 0;
+                    string strUpQry = $"UPDATE Process_DEV " +
+                                      $"  SET PrcEndTime = {DateTime.Now.ToShortTimeString()}" +
+                                      $"  , PrcResult = {PrcResult} " +
+                                      $"  , ModDate = {DateTime.Now} " +
+                                      $"  , ModID = {"SYS"} " +
+                                      $"  WHERE PrcIdx =  " +
+                                      $"  (SELECT TOP 1 PrcIdx FROM Process_DEV ORDER BY PrcIdx DESC)";
+
+                    try
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand(strUpQry, conn);
+                        if (cmd.ExecuteNonQuery() == 1) UpdateText("[DB]센싱값 Update 성공");
+                        else UpdateText("[DB]센싱값 Update 실패");
+                    }
+                    catch (Exception ex)
+                    {
+                        UpdateText($">>>>DB ERROR!! : {ex.Message}");
+                    }
                 }
             }
             iotData.Clear();//데이터 모두 삭제 메모리 누수가 일어나지 않는다.
