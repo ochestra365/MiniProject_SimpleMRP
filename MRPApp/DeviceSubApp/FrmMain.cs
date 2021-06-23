@@ -79,7 +79,7 @@ namespace DeviceSubApp
         //라즈베리에서 들어온 메시지를 전역리스트에 입력하는 메서드
         private void PrcInputDataToList(Dictionary<string, string> currentData)
         {
-            if (currentData["PRC_MSG"] != "OK" || currentData["PRC_MSG"] != "FAIL")
+            if (currentData["PRC_MSG"] == "OK" || currentData["PRC_MSG"] == "FAIL")
                 iotData.Add(currentData);//OK에서 FAIL만 들어가기 때문에 어디서든 들어올 일이 없다.
         }
 
@@ -111,7 +111,7 @@ namespace DeviceSubApp
                     string strUpQry = $"UPDATE Process_DEV " +
                                       $"  SET PrcEndTime = '{DateTime.Now.ToString("HH:mm:ss")}'" +
                                       $"  , PrcResult = '{PrcResult}' " +
-                                      $"  , ModDate = '{DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")}' " +
+                                      $"  , ModDate = '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' " +
                                       $"  , ModID = '{"SYS"}' " +
                                       $"  WHERE PrcIdx =  " +
                                       $"  (SELECT TOP 1 PrcIdx FROM Process_DEV ORDER BY PrcIdx DESC)";
