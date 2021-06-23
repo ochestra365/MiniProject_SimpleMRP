@@ -37,7 +37,6 @@ namespace DeviceSubApp
             {
                 brokerAddress = IPAddress.Parse(TxtConnectionString.Text);
                 client = new MqttClient(brokerAddress);
-                //client= new (MqttClient.)brokerAdd
                 client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
             }
             catch (Exception ex)
@@ -46,25 +45,27 @@ namespace DeviceSubApp
             }
         }
 
-        private void Client_MqttMsgPublishReceived(object sender, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
+        private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             try
             {
-
+                var message = Encoding.UTF8.GetString(e.Message);
+                UpdateText($">>>> 받은 메세지 : {message}");
             }
             catch (Exception ex)
             {
-                RtbSubscr.AppendText($">>>>ERROR!! : {ex.Message}");
+                UpdateText($">>>>ERROR!! : {ex.Message}");
             }
-        }
+        }//메시지 박스가 뜨면 팝업이 뜨고 진행이 안됨.. 누가 닫아줘야 함. 에러메시지도 리치박스안에서 처리되야 함. 로그로 정상적으로 다 찍어줘야 함.
 
         private void BtnConnect_Click(object sender, EventArgs e)
         {
             client.Connect(TxtClientID.Text);//SUBSCR01
-            RtbSubscr.AppendText(">>>>> Client Connect\n");
+            UpdateText(">>>>> Client Connect");
+
             client.Subscribe(new string[] { TxtSubscriptionTopic.Text },
                 new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-            RtbSubscr.AppendText(">>>>Subscring to : " + TxtSubscriptionTopic.Text+"\n");
+            UpdateText(">>>>Subscring to : " + TxtSubscriptionTopic.Text);
 
             BtnConnect.Enabled = false;
             BtnDisconnect.Enabled = true;
@@ -73,9 +74,23 @@ namespace DeviceSubApp
         private void BtnDisconnect_Click(object sender, EventArgs e)
         {
             client.Disconnect();
-            RtbSubscr.AppendText(">>>>Client disconnected\n");
+            UpdateText(">>>>Client disconnected");
             BtnConnect.Enabled = true;
             BtnDisconnect.Enabled = false;
+        }
+
+        private void UpdateText(string message)//delegate는 파라미터 시그니처가 같아야 한다. 이벤트 핸들러들을 의미한다. 대리자로 처리하는 것이 에러 구문을 띄우는 것이다.
+        {
+            if (RtbSubscr.InvokeRequired)
+            {
+                UpdateTextCallback callback =new UpdateTextCallback(UpdateText);
+                this.Invoke(callback, new object[] { message });
+            }
+            else
+            {
+                RtbSubscr.AppendText(message + "\n");
+                RtbSubscr.ScrollToCaret();//message log나 출력이 많이 되는 거를 대리자랑 업데이트 테스트를 많이 하게 된다. 그럼 별 문제 없이 시행된다.
+            }
         }
     }
 }
