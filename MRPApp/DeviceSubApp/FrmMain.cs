@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -30,7 +32,7 @@ namespace DeviceSubApp
 
         private void InitailizeAllData()
         {
-            connectionString = "Data Source="+TxtConnectionString.Text+";Initial Catalog=MRP;User ID=sa;password=mssql_p@ssw0rd!";
+            connectionString = "Data Source=" + TxtConnectionString.Text + ";Initial Catalog=MRP;User ID=sa;password=mssql_p@ssw0rd!";
             lineCount = 0;
             BtnConnect.Enabled = true;
             BtnDisconnect.Enabled = false;
@@ -57,7 +59,11 @@ namespace DeviceSubApp
             {
                 var message = Encoding.UTF8.GetString(e.Message);
                 UpdateText($">>>> 받은 메세지 : {message}");
-                //
+                // message(json) > C# 타입으로 바꿀 거다.
+                var currentData = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);//역직렬화
+                PrcInputDataToList(currentData);//필요한 데이터를 받고 나머지 데이터는 다 버리겠다. 소프트웨어 적으로 정확도를 높인다.
+
+                //받기 직전의 원본 데이터와 똑같이 받게 된다.
                 sw.Stop();
                 sw.Reset();//다시 0으로 시작되게 함.
                 sw.Start();
@@ -67,8 +73,15 @@ namespace DeviceSubApp
                 UpdateText($">>>>ERROR!! : {ex.Message}");
             }
 
-            
+
         }//메시지 박스가 뜨면 팝업이 뜨고 진행이 안됨.. 누가 닫아줘야 함. 에러메시지도 리치박스안에서 처리되야 함. 로그로 정상적으로 다 찍어줘야 함.
+        List<Dictionary<string, string>> iotData = new List<Dictionary<string, string>>();
+        //라즈베리에서 들어온 메시지를 전역리스트에 입력하는 메서드
+        private void PrcInputDataToList(Dictionary<string, string> currentData)
+        {
+            if (currentData["PRC_MSG"] != "OK" || currentData["PRC_MSG"] != "FAIL")
+                iotData.Add(currentData);//OK에서 FAIL만 들어가기 때문에 어디서든 들어올 일이 없다.
+        }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -78,8 +91,32 @@ namespace DeviceSubApp
                 sw.Stop();
                 sw.Reset();
                 //TODO 실제 처리프로세스 실행
-                UpdateText("처리!!");
+                // UpdateText("처리!!");
+                //Prc-->실제적으로 필요한 데이터만 DB에 집어넣고 나머지는 초기화//
+                PrcCorrectDataDB();
             }
+        }
+
+        //여러 데이터 중 최종 데이터만 DB에 입력하는 처리 메서드
+        private void PrcCorrectDataDB()
+        {
+            if (iotData.Count > 0)
+            {
+                var correctData = iotData[iotData.Count - 1];//딕셔너리 데이터
+                //DB에 입력한다.
+                //UpdateText("DB처리");
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    string strUpQry = "UPDATE Process_DEV" +
+                                      "SET PrcEndTime = { }" +
+                                      ", PrcResult = { }" +
+                                      ", ModDate = { }" +
+                                      ", ModID = { }" +
+                                      "WHERE PrcIdx =" +
+                                      "(SELECT TOP 1 PrcIdx FROM Process_DEV ORDER BY PrcIdx DESC)";
+                }
+            }
+            iotData.Clear();//데이터 모두 삭제 메모리 누수가 일어나지 않는다.
         }
 
         private void BtnConnect_Click(object sender, EventArgs e)
@@ -107,7 +144,7 @@ namespace DeviceSubApp
         {
             if (RtbSubscr.InvokeRequired)
             {
-                UpdateTextCallback callback =new UpdateTextCallback(UpdateText);
+                UpdateTextCallback callback = new UpdateTextCallback(UpdateText);
                 this.Invoke(callback, new object[] { message });
             }
             else
