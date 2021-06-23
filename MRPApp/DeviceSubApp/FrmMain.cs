@@ -16,5 +16,15 @@ namespace DeviceSubApp
         {
             InitializeComponent();
         }
+
+        private void BtnConnect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnDisconnect_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
