@@ -48,30 +48,42 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="80"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="110"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="코드"/>
-            <Label Grid.Row="1" Grid.Column="0" Content="코드명"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="코드설명"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="순번"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="공장"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="공정일"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="공정로드타임"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="공정시작시간"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="공정종료시간"/>
+            <Label Grid.Row="6" Grid.Column="0" Content="공정설비"/>
+            <Label Grid.Row="7" Grid.Column="0" Content="계획수량"/>
 
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                <TextBox x:Name="TxtBasicCode" Margin="3" Width="200" Text="" FontSize="14" MaxLength="8"/>
-                <TextBlock x:Name="LblBasicCode" Text="ErrorMessage" Foreground="OrangeRed"/>
+                <TextBox x:Name="TxtSchIdx" Margin="3" Width="200" Text="" FontSize="14" IsReadOnly="True" Background="LightGray"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                <TextBox x:Name="TxtCodeName" Margin="3" Width="200" Text="" FontSize="14" MaxLength="100"/>
-                <TextBlock x:Name="LblCodeName" Text="ErrorMessage" Foreground="OrangeRed"/>
+                <ComboBox x:Name="CboPlantCode" Margin="3" Width="200"/>
+                <TextBlock x:Name="LblPlantCode" Text="ErrorMessage" Foreground="OrangeRed"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-                <TextBox x:Name="TxtCodeDesc" Margin="3" Width="200" Text="" FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-                <TextBlock x:Name="LblCodeDesc" Text="ErrorMessage" Foreground="OrangeRed"/>
+                <DatePicker x:Name="DtpSchDate" Margin="3" Width="200"></DatePicker>
+                <TextBlock x:Name="LblSchDate" Text="ErrorMessage" Foreground="OrangeRed"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                <TextBox x:Name="TxtSchLoadTime" Margin="3" Width="200" />
+                <TextBlock x:Name="LblSchLoadTime" Text="ErrorMessage" Foreground="OrangeRed"/>
             </StackPanel>
         </Grid>
         <!-- 입력/수정영역 끝 -->
@@ -116,18 +128,6 @@
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
-            <Button x:Name="BtnDelete" 
-                    Background="LightSteelBlue" Margin="10,0"
-                    Height="40" Width="90" Content="삭제" FontSize="14" Click="BtnDelete_Click">
-                <Button.ContentTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding}" Margin="5, 0" VerticalAlignment="Center" />
-                            <Image Source="/Resources/delete.png" Width="24" Height="24" />
-                        </StackPanel>
-                    </DataTemplate>
-                </Button.ContentTemplate>
-            </Button>
         </StackPanel>
         <!-- 버튼 영역 끝-->
         <!-- 컨텐츠영역 시작 -->
@@ -137,7 +137,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="검색어"></Label>
+                <Label Content="공정일자"></Label>
                 <TextBox x:Name="TxtSearch" Width="200" Margin="8"  KeyDown="TxtSearch_KeyDown"></TextBox>
                 <Button x:Name="BtnSearch" Content="검색" Margin="8" Width="80" FontSize="14" Background="CornflowerBlue" Click="BtnSearch_Click"></Button>
             </StackPanel>
@@ -147,10 +147,10 @@
                       Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
                       ItemsSource="{Binding}" SelectedCellsChanged="GrdData_SelectedCellsChanged" Margin="0,48,0,2" Grid.RowSpan="2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding BasicCode}" Header="코드" Width="100" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding CodeName}" Header="코드명" Width="1*" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding CodeDesc}" Header="코드설명" Width="1*" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding RegDate,StringFormat='yyyy-MM-dd HH:mm:ss'}" Header="등록일" Width="1*" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding SchIdx}" Header="순번" Width="100" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding PlantCode}" Header="공장" Width="1*" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding SchDate}" Header="공정일" Width="1*" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding SchAmount}" Header="계획수량" Width="1*" IsReadOnly="True" />
                     <DataGridTextColumn  Header="" Width="10" IsReadOnly="True" /><!--그냥 더미 컬럼 여백 조정-->
                 </DataGrid.Columns>
             </DataGrid>
