@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRPApp", "MRPApp\MRPApp.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceSubApp", "DeviceSubApp\DeviceSubApp.csproj", "{61920D50-C8AA-4116-9E4B-B66BC1E68414}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRPApp.Test", "MRPApp.Test\MRPApp.Test.csproj", "{4EFDDBBB-3149-4486-94E1-61923141BD25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{61920D50-C8AA-4116-9E4B-B66BC1E68414}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61920D50-C8AA-4116-9E4B-B66BC1E68414}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61920D50-C8AA-4116-9E4B-B66BC1E68414}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EFDDBBB-3149-4486-94E1-61923141BD25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EFDDBBB-3149-4486-94E1-61923141BD25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EFDDBBB-3149-4486-94E1-61923141BD25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EFDDBBB-3149-4486-94E1-61923141BD25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

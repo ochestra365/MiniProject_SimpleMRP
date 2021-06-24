@@ -11,7 +11,7 @@ namespace MRPApp.Logic
     public class DataAccess
     {
         //셋팅 테이블에서 데이터 가져오기
-        internal static List<Settings> GetSettings()//internal 같은 어쎔블리안에서는 public으로 작동하니까 internal
+        public static List<Settings> GetSettings()//internal 같은 어쎔블리안에서는 public으로 작동하니까 internal
         {
             List<Settings> settings;//Settings 테이블이랑 매칭이 되어 있다.
             using (var ctx=new MRPEntities())//SQL서버 직접 연결 시 커넥션스트링과 같은 역할을 한다고 보면 된다. MRPEntities는 연결과 같다
@@ -26,7 +26,7 @@ namespace MRPApp.Logic
             return settings;
         }
 
-        internal static int SetSettings(Settings item)//신규 버튼을 누를 때 클리어 및 코드를 다 쓸 수 있게 손봐줘야 한다.
+        public static int SetSettings(Settings item)//신규 버튼을 누를 때 클리어 및 코드를 다 쓸 수 있게 손봐줘야 한다.
         {
             using (var ctx = new MRPEntities())
             {
@@ -35,7 +35,7 @@ namespace MRPApp.Logic
             }
         }
 
-        internal static int DelSettings(Settings item)//그리드에 올라간 데이터라서 정확하게 지울 수 없다. 엔티티프레임워크에서 DB와 다 연관되어 있다. 정확한 데이터를 지우기 위해 찾은 데이터를 지우는 것이다.
+        public static int DelSettings(Settings item)//그리드에 올라간 데이터라서 정확하게 지울 수 없다. 엔티티프레임워크에서 DB와 다 연관되어 있다. 정확한 데이터를 지우기 위해 찾은 데이터를 지우는 것이다.
         {
             using (var ctx = new MRPEntities())
             {
