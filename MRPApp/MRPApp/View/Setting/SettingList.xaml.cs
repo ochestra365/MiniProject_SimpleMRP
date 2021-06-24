@@ -30,14 +30,19 @@ namespace MRPApp.View.Setting
             try
             {
                 LoadGridData();
-
-                LblBasicCode.Visibility = LblCodeDesc.Visibility = LblCodeName.Visibility = Visibility.Hidden;
+                InitErrorMessage();
             }
             catch (Exception ex)
             {
                 Commons.LOGGER.Error($"예외발생 StoreList Loaded : {ex}");
                 throw ex;
             }
+        }
+
+        private void InitErrorMessage()
+        {
+            LblBasicCode.Visibility = LblCodeDesc.Visibility = LblCodeName.Visibility = Visibility.Hidden;
+
         }
 
         private void LoadGridData()
@@ -103,6 +108,7 @@ namespace MRPApp.View.Setting
 
         private async void BtnInsert_Click(object sender, RoutedEventArgs e)
         {
+            if (IsValidInputs() != true) return;
             var setting = new Model.Settings();//형변환//새로운 객체를 생성함
             setting.BasicCode = TxtBasicCode.Text;
             setting.CodeName = TxtCodeName.Text;
@@ -129,6 +135,31 @@ namespace MRPApp.View.Setting
             {
                 Commons.LOGGER.Error($"예외발생 {ex}");
             }
+        }
+        //입력데이터 검증 메서드(반드시 필요하다. 빈 값이 들어가는 것을 막기 위함이다.)
+        private bool IsValidInputs()
+        {
+            var isValid = true;
+            InitErrorMessage();
+
+            if (string.IsNullOrEmpty(TxtBasicCode.Text))
+            {
+                LblBasicCode.Visibility = Visibility.Visible;
+                LblBasicCode.Text = "코드를 입력하세요";
+                isValid = false;
+            }
+            else if(Logic.DataAccess.GetSettings().Where(s=>s.BasicCode.Equals(TxtBasicCode.Text)).Count()>0){
+                LblBasicCode.Visibility = Visibility.Visible;
+                LblBasicCode.Text = "중복코드가 존재합니다";
+                isValid = false;
+            }
+            if (string.IsNullOrEmpty(TxtCodeName.Text))
+            {
+                LblCodeName.Visibility = Visibility.Visible;
+                LblCodeName.Text = "코드를 입력하세요";
+                isValid = false;
+            }
+            return isValid;
         }
 
         private async void BtnUpdate_Click(object sender, RoutedEventArgs e)
