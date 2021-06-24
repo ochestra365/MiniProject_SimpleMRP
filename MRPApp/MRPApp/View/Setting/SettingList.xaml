@@ -69,12 +69,54 @@
                 <TextBlock x:Name="LblCodeName" Text="ErrorMessage" Foreground="OrangeRed"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-                <TextBox x:Name="TxtCodeDesc" Margin="3" Width="200" Text="" FontSize="14" />
+                <TextBox x:Name="TxtCodeDesc" Margin="3" Width="200" Text="" FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
                 <TextBlock x:Name="LblCodeDesc" Text="ErrorMessage" Foreground="OrangeRed"/>
             </StackPanel>
         </Grid>
         <!-- 입력/수정영역 끝 -->
-        
+        <!-- 버튼 영역 추가-->
+        <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" 
+                    Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="BtnNew" 
+                    Height="50" Width="120" Content="신규" FontSize="14" 
+                    Background="CornflowerBlue"
+                    Margin="10, 0" Click="BtnNew_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="5, 0" VerticalAlignment="Center" />
+                            <Image Source="/Resources/sign_add.png" Width="24" Height="24" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button x:Name="BtnInsert" 
+                    Height="50" Width="120" Content="입력" FontSize="14" 
+                    Background="CornflowerBlue"
+                    Margin="0, 0,10,0" Click="BtnInsert_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="5, 0" VerticalAlignment="Center" />
+                            <Image Source="/Resources/sign_check.png" Width="24" Height="24" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button x:Name="BtnUpdate" 
+                    Background="LightSteelBlue"
+                    Height="50" Width="120" Content="수정" FontSize="14" Click="BtnUpdate_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="5, 0" VerticalAlignment="Center" />
+                            <Image Source="/Resources/pencil.png" Width="24" Height="24" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </StackPanel>
+        <!-- 버튼 영역 끝-->
         <!-- 컨텐츠영역 시작 -->
         <Grid Grid.Row="1" Grid.Column="1" Margin="5">
             <Grid.RowDefinitions>                

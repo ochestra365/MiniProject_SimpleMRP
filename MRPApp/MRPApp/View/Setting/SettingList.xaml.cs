@@ -86,5 +86,20 @@ namespace MRPApp.View.Setting
         {
            
         }
+
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnInsert_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
