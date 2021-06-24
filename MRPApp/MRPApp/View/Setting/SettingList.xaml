@@ -10,7 +10,8 @@
     d:DesignHeight="630" d:DesignWidth="1200"
     Title="SettingList" Loaded="Page_Loaded">
     <Page.Resources>
-        <Style TargetType="Label"><!-- {x:Type Label} -->
+        <Style TargetType="Label">
+            <!-- {x:Type Label} -->
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -36,12 +37,12 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
-    
+
         <!-- 제목입력 시작 -->
         <Label Grid.Row="0" Grid.Column="1" Content="설정" FontSize="26" FontWeight="ExtraBold"
                VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" />
         <!-- 제목입력 끝 -->
-        
+
         <!-- 입력/수정영역 시작 -->
         <Grid Grid.Row="1" Grid.Column="2" Margin="15">
             <Grid.RowDefinitions>
@@ -119,22 +120,26 @@
         <!-- 버튼 영역 끝-->
         <!-- 컨텐츠영역 시작 -->
         <Grid Grid.Row="1" Grid.Column="1" Margin="5">
-            <Grid.RowDefinitions>                
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"/>
-
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="검색어"></Label>
+                <TextBox x:Name="TxtSearch" Width="200" Margin="8"></TextBox>
+                <Button x:Name="BtnSearch" Content="검색" Margin="8" Width="80" FontSize="14" Background="CornflowerBlue" Click="BtnSearch_Click"></Button>
+            </StackPanel>
             <DataGrid x:Name="GrdData" 
                       AutoGenerateColumns="False" SelectionUnit="FullRow"
                       GridLinesVisibility="Vertical" IsReadOnly="True"
                       Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
-                      ItemsSource="{Binding}">
+                      ItemsSource="{Binding}" SelectedCellsChanged="GrdData_SelectedCellsChanged" Margin="0,48,0,2" Grid.RowSpan="2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding StoreID}" Header="순번" Width="60" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding StoreName}" Header="창고명" Width="1*" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding StoreLocation}" Header="창고위치" Width="1*" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding StockQuantity}" Header="재고수" Width="1*" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding BasicCode}" Header="코드" Width="100" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding CodeName}" Header="코드명" Width="1*" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding CodeDesc}" Header="코드설명" Width="1*" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding RegDate}" Header="등록일" Width="1*" IsReadOnly="True" />
+                    <DataGridTextColumn  Header="" Width="10" IsReadOnly="True" /><!--그냥 더미 컬럼 여백 조정-->
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
