@@ -16,7 +16,7 @@ namespace MRPApp.Logic
             List<Settings> settings;//Settings 테이블이랑 매칭이 되어 있다.
             using (var ctx=new MRPEntities())//SQL서버 직접 연결 시 커넥션스트링과 같은 역할을 한다고 보면 된다. MRPEntities는 연결과 같다
             {
-                settings = ctx.Settings.ToList();
+                settings = ctx.Settings.ToList();//SELECT
             }
             //커넥션이 있을 때 커넥션을 닫아주는 역할을 한다. using을 하며 한 트랜잭션하에서 문제가 발생한다. 안정성이 좋다.
             //using을 안쓴다고 메모리 누수는 일어나지 않는다. 커넥션 연결의 자동해제를 위해서 using에서 해준다. 안정성을 한다.
@@ -30,8 +30,18 @@ namespace MRPApp.Logic
         {
             using (var ctx = new MRPEntities())
             {
-                ctx.Settings.AddOrUpdate(item);
+                ctx.Settings.AddOrUpdate(item);//INSERT or UPDATE
                 return ctx.SaveChanges();//COMMIT
+            }
+        }
+
+        internal static int DelSettings(Settings item)//그리드에 올라간 데이터라서 정확하게 지울 수 없다. 엔티티프레임워크에서 DB와 다 연관되어 있다. 정확한 데이터를 지우기 위해 찾은 데이터를 지우는 것이다.
+        {
+            using (var ctx = new MRPEntities())
+            {
+                var obj = ctx.Settings.Find(item.BasicCode);//DB에서 데이터 검색한 뒤에 실제 데이터를 삭제한다.
+                ctx.Settings.Remove(obj);//DELETE
+                return ctx.SaveChanges();
             }
         }
     }

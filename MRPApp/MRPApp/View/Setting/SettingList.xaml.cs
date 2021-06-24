@@ -98,7 +98,7 @@ namespace MRPApp.View.Setting
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
-
+            ClearInputs();
         }
 
         private async void BtnInsert_Click(object sender, RoutedEventArgs e)
@@ -107,6 +107,8 @@ namespace MRPApp.View.Setting
             setting.BasicCode = TxtBasicCode.Text;
             setting.CodeName = TxtCodeName.Text;
             setting.CodeDesc = TxtCodeDesc.Text;
+            setting.RegDate = DateTime.Now;
+            setting.RegID = "MRP";
 
             try
             {
@@ -134,6 +136,9 @@ namespace MRPApp.View.Setting
             var setting = GrdData.SelectedItem as Model.Settings;//형변환 선택한 객체를 수정
             setting.CodeName = TxtCodeName.Text;
             setting.CodeDesc = TxtCodeDesc.Text;
+            setting.ModDate = DateTime.Now;
+            setting.ModID = "MRP";
+
 
             try
             {
@@ -166,7 +171,10 @@ namespace MRPApp.View.Setting
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
+            var search = TxtSearch.Text.Trim();//화이트 스페이스 날린다.
 
+            var settings=Logic.DataAccess.GetSettings().Where(s => s.CodeName.Contains(search)).ToList();
+            this.DataContext = settings;
         }
 
         private void GrdData_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
@@ -185,6 +193,42 @@ namespace MRPApp.View.Setting
             catch (Exception ex)
             {
                 Commons.LOGGER.Error($"예외발생 : {ex}");
+                ClearInputs();
+            }
+        }
+
+        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var setting = GrdData.SelectedItem as Model.Settings;
+
+            if(setting == null)
+            {
+                await Commons.ShowMessageAsync("삭제", "삭제할 코드를 선택하세요");
+                return;
+            }
+            else
+            {
+                try
+                {
+                    var result = Logic.DataAccess.DelSettings(setting);
+
+                    if (result == 0)
+                    {
+                        Commons.LOGGER.Error("데이터 삭제 시 오류발생");
+                        await Commons.ShowMessageAsync("오류", "데이터 삭제실패");
+                    }
+                    else
+                    {
+                        Commons.LOGGER.Info($"데이터 삭제 성공 : {setting.BasicCode}");//로그
+                        ClearInputs();
+                        LoadGridData();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Commons.LOGGER.Error($"예외발생 {ex}");
+                }
+               
             }
         }
     }
