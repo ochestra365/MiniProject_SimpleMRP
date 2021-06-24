@@ -101,14 +101,37 @@ namespace MRPApp.View.Setting
 
         }
 
-        private void BtnInsert_Click(object sender, RoutedEventArgs e)
+        private async void BtnInsert_Click(object sender, RoutedEventArgs e)
         {
+            var setting = new Model.Settings();//형변환//새로운 객체를 생성함
+            setting.BasicCode = TxtBasicCode.Text;
+            setting.CodeName = TxtCodeName.Text;
+            setting.CodeDesc = TxtCodeDesc.Text;
 
+            try
+            {
+                var result = Logic.DataAccess.SetSettings(setting);
+                if (result == 0)
+                {
+                    Commons.LOGGER.Error("데이터 입력 시 오류발생");
+                    await Commons.ShowMessageAsync("오류", "데이터 입력실패");
+                }
+                else
+                {
+                    Commons.LOGGER.Info($"데이터 입력 성공 : {setting.BasicCode}");//로그
+                    ClearInputs();
+                    LoadGridData();
+                }
+            }
+            catch (Exception ex)
+            {
+                Commons.LOGGER.Error($"예외발생 {ex}");
+            }
         }
 
         private async void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            var setting = GrdData.SelectedItem as Model.Settings;//형변환
+            var setting = GrdData.SelectedItem as Model.Settings;//형변환 선택한 객체를 수정
             setting.CodeName = TxtCodeName.Text;
             setting.CodeDesc = TxtCodeDesc.Text;
 
