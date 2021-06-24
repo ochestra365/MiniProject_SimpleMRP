@@ -12,7 +12,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
+using System.Windows.Input;
 namespace MRPApp.View.Setting
 {
     /// <summary>
@@ -230,6 +230,11 @@ namespace MRPApp.View.Setting
                 }
                
             }
+        }
+
+        private void TxtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) BtnSearch_Click(sender, e);
         }
     }
 }

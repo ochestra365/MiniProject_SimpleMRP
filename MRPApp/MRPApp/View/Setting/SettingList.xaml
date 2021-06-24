@@ -138,7 +138,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="검색어"></Label>
-                <TextBox x:Name="TxtSearch" Width="200" Margin="8"></TextBox>
+                <TextBox x:Name="TxtSearch" Width="200" Margin="8"  KeyDown="TxtSearch_KeyDown"></TextBox>
                 <Button x:Name="BtnSearch" Content="검색" Margin="8" Width="80" FontSize="14" Background="CornflowerBlue" Click="BtnSearch_Click"></Button>
             </StackPanel>
             <DataGrid x:Name="GrdData" 
