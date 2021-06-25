@@ -166,16 +166,20 @@ namespace MRPApp.View.Schedule
 
         private async void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            var setting = GrdData.SelectedItem as Model.Settings;//형변환 선택한 객체를 수정
-            //setting.CodeName = TxtCodeName.Text;
-            //setting.CodeDesc = TxtCodeDesc.Text;
-            setting.ModDate = DateTime.Now;
-            setting.ModID = "MRP";
+            var item = GrdData.SelectedItem as Model.Schdules;
+            item.PlantCode = CboPlantCode.SelectedValue.ToString();
+            item.SchDate = DateTime.Parse(DtpSchDate.Text);
+            item.SchLoadTime = int.Parse(TxtSchLoadTime.Text);
+            item.SchStartTime = TmpSchStartTime.SelectedDateTime.Value.TimeOfDay;
+            item.SchEndTime = TmpSchEndTime.SelectedDateTime.Value.TimeOfDay;
+            item.SchFacilityID = CboSchFacilityID.SelectedValue.ToString();
+            item.SchAmount = (int)NudSchAmount.Value;
 
-
+            item.ModDate = DateTime.Now;
+            item.ModID = "MRP";
             try
             {
-                var result = Logic.DataAccess.SetSettings(setting);
+                var result = Logic.DataAccess.SetSchedule(item);
                 if (result == 0)
                 {
                     Commons.LOGGER.Error("데이터 수정 시 오류발생");
@@ -183,7 +187,7 @@ namespace MRPApp.View.Schedule
                 }
                 else
                 {
-                    Commons.LOGGER.Info($"데이터 수정 성공 : {setting.BasicCode}");//로그
+                    Commons.LOGGER.Info($"데이터 수정 성공 : {item.SchIdx}");//로그
                     ClearInputs();
                     LoadGridData();
                 }
@@ -220,11 +224,11 @@ namespace MRPApp.View.Schedule
             {
                 var item = GrdData.SelectedItem as Model.Schdules;
                 TxtSchIdx.Text = item.SchIdx.ToString();
-                CboPlantCode.SelectedItem = item.PlantCode;
+                CboPlantCode.SelectedValue = item.PlantCode;
                 DtpSchDate.Text = item.SchDate.ToString();
                 TxtSchLoadTime.Text = item.SchLoadTime.ToString();
-                TmpSchStartTime.SelectedDateTime = null;//item.SchStartTime;
-                TmpSchEndTime.SelectedDateTime = null;
+                TmpSchStartTime.SelectedDateTime = new DateTime(item.SchStartTime.Value.Ticks);
+                TmpSchEndTime.SelectedDateTime = new DateTime(item.SchEndTime.Value.Ticks); 
                 CboSchFacilityID.SelectedItem = item.SchFacilityID;
                 NudSchAmount.Value = item.SchAmount;
             }
