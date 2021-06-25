@@ -52,5 +52,14 @@ namespace MRPApp.Logic
                 return ctx.SaveChanges();
             }
         }
+
+        internal static int SetSchedule(Schdules item)
+        {
+            using (var ctx = new MRPEntities())
+            {
+                ctx.Schdules.AddOrUpdate(item);//INSERT or UPDATE
+                return ctx.SaveChanges();//COMMIT
+            }
+        }
     }
 }
