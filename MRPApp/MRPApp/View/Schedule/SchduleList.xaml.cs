@@ -111,27 +111,32 @@ namespace MRPApp.View.Schedule
         private async void BtnInsert_Click(object sender, RoutedEventArgs e)
         {
             if (IsValidInputs() != true) return;
-            //var setting = new Model.Settings();//형변환//새로운 객체를 생성함
-            //setting.BasicCode = TxtBasicCode.Text;
-            //setting.CodeName = TxtCodeName.Text;
-            //setting.CodeDesc = TxtCodeDesc.Text;
-            //setting.RegDate = DateTime.Now;
-            //setting.RegID = "MRP";
+            var item = new Model.Schdules();
+            item.PlantCode = CboPlantCode.SelectedValue.ToString();
+            item.SchDate = DateTime.Parse(DtpSchDate.Text);
+            item.SchLoadTime = int.Parse(TxtSchLoadTime.Text);
+            item.SchStartTime = TmpSchStartTime.SelectedDateTime.Value.TimeOfDay;
+            item.SchEndTime = TmpSchEndTime.SelectedDateTime.Value.TimeOfDay;
+            item.SchFacilityID = CboSchFacilityID.SelectedValue.ToString();
+            item.SchAmount = (int)NudSchAmount.Value;
+
+            item.ModDate = DateTime.Now;
+            item.ModID = "MRP";
 
             try
             {
-                //var result = Logic.DataAccess.SetSettings(setting);
-                //if (result == 0)
-                //{
-                //    Commons.LOGGER.Error("데이터 입력 시 오류발생");
-                //    await Commons.ShowMessageAsync("오류", "데이터 입력실패");
-                //}
-                //else
-                //{
-                //    Commons.LOGGER.Info($"데이터 입력 성공 : {setting.BasicCode}");//로그
-                //    ClearInputs();
-                //    LoadGridData();
-                //}
+                var result = Logic.DataAccess.SetSchedule(item);
+                if (result == 0)
+                {
+                    Commons.LOGGER.Error("데이터 입력 시 오류발생");
+                    await Commons.ShowMessageAsync("오류", "데이터 입력실패");
+                }
+                else
+                {
+                    Commons.LOGGER.Info($"데이터 입력 성공 : {item.SchIdx}");//로그
+                    ClearInputs();
+                    LoadGridData();
+                }
             }
             catch (Exception ex)
             {
@@ -144,8 +149,50 @@ namespace MRPApp.View.Schedule
             var isValid = true;
             InitErrorMessage();
 
+
+            if(CboPlantCode.SelectedValue == null)
+            {
+                LblPlantCode.Visibility = Visibility.Visible;
+                LblPlantCode.Text = "공장을 선택하세요";
+                isValid = false;
+            }
+            if (string.IsNullOrEmpty(DtpSchDate.Text))
+            {
+                LblSchDate.Visibility = Visibility.Visible;
+                LblSchDate.Text = "공정일을 입력하세요";
+                isValid = false;
+            }
+
+            // 공장별로 공정일이 DB값이 있으면 입력되면 안된다.
+            // PC010001(수원) 2021-06-24 또 넣으면 안된다.
+            var result = Logic.DataAccess.GetSchedules().Where(s => s.PlantCode.Equals(CboPlantCode.SelectedValue.ToString())).Where(d => d.SchDate.Equals(DateTime.Parse(DtpSchDate.Text))).Count();
+            if (result > 0)
+            {
+                LblSchDate.Visibility = Visibility.Visible;
+                LblSchDate.Text = "해당 공장의 공정일에 계획이 이미 있습니다.";
+                isValid = false;
+            }
+
+            if (string.IsNullOrEmpty(TxtSchLoadTime.Text))
+            {
+                LblSchLoadTime.Visibility = Visibility.Visible;
+                LblSchLoadTime.Text = "로드타임을 입력하세요";
+                isValid = false;
+            }
+            if (CboSchFacilityID.SelectedValue == null)
+            {
+                LblSchFacilityID.Visibility = Visibility.Visible;
+                LblSchFacilityID.Text = "공정설비를 선택하세요";
+                isValid = false;
+            }
+            if (NudSchAmount.Value <= 0)
+            {
+                LblSchAmount.Visibility = Visibility.Visible;
+                LblSchAmount.Text = "계획수량은 0개 이상입니다.";
+                isValid = false;
+            }
             //if (string.IsNullOrEmpty(TxtBasicCode.Text))
-            //{
+            //
             //    LblBasicCode.Visibility = Visibility.Visible;
             //    LblBasicCode.Text = "코드를 입력하세요";
             //    isValid = false;
