@@ -18,6 +18,7 @@ using MRPApp.View;
 using MRPApp.View.Account;
 using MRPApp.View.Store;
 using MRPApp.View.Setting;
+using MRPApp.View.Schedule;
 
 namespace MRPApp
 {
@@ -43,8 +44,15 @@ namespace MRPApp
        
         private async void BtnSchdule_Click(object sender, RoutedEventArgs e)
         {
-           
-           
+            try
+            {
+                ActiveControl.Content = new SchduleList();
+            }
+            catch (Exception ex)
+            {
+                Commons.LOGGER.Error($"예외발생 BtnSchdule_Click : {ex}");
+                await this.ShowMessageAsync("예외", $"예외발생 : {ex}");
+            }
         }
 
         private async void BtnAccount_Click(object sender, RoutedEventArgs e)

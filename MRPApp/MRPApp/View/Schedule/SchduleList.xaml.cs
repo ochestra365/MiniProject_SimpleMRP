@@ -33,7 +33,7 @@ namespace MRPApp.View.Schedule
 
         private void InitErrorMessage()
         {
-            LblBasicCode.Visibility = LblCodeDesc.Visibility = LblCodeName.Visibility = Visibility.Hidden;
+            LblPlantCode.Visibility = LblSchDate.Visibility = LblSchEndTime.Visibility = LblSchLoadTime.Visibility = LblSchStartTime.Visibility = Visibility.Hidden;
 
         }
 
@@ -101,27 +101,27 @@ namespace MRPApp.View.Schedule
         private async void BtnInsert_Click(object sender, RoutedEventArgs e)
         {
             if (IsValidInputs() != true) return;
-            var setting = new Model.Settings();//형변환//새로운 객체를 생성함
-            setting.BasicCode = TxtBasicCode.Text;
-            setting.CodeName = TxtCodeName.Text;
-            setting.CodeDesc = TxtCodeDesc.Text;
-            setting.RegDate = DateTime.Now;
-            setting.RegID = "MRP";
+            //var setting = new Model.Settings();//형변환//새로운 객체를 생성함
+            //setting.BasicCode = TxtBasicCode.Text;
+            //setting.CodeName = TxtCodeName.Text;
+            //setting.CodeDesc = TxtCodeDesc.Text;
+            //setting.RegDate = DateTime.Now;
+            //setting.RegID = "MRP";
 
             try
             {
-                var result = Logic.DataAccess.SetSettings(setting);
-                if (result == 0)
-                {
-                    Commons.LOGGER.Error("데이터 입력 시 오류발생");
-                    await Commons.ShowMessageAsync("오류", "데이터 입력실패");
-                }
-                else
-                {
-                    Commons.LOGGER.Info($"데이터 입력 성공 : {setting.BasicCode}");//로그
-                    ClearInputs();
-                    LoadGridData();
-                }
+                //var result = Logic.DataAccess.SetSettings(setting);
+                //if (result == 0)
+                //{
+                //    Commons.LOGGER.Error("데이터 입력 시 오류발생");
+                //    await Commons.ShowMessageAsync("오류", "데이터 입력실패");
+                //}
+                //else
+                //{
+                //    Commons.LOGGER.Info($"데이터 입력 성공 : {setting.BasicCode}");//로그
+                //    ClearInputs();
+                //    LoadGridData();
+                //}
             }
             catch (Exception ex)
             {
@@ -134,31 +134,31 @@ namespace MRPApp.View.Schedule
             var isValid = true;
             InitErrorMessage();
 
-            if (string.IsNullOrEmpty(TxtBasicCode.Text))
-            {
-                LblBasicCode.Visibility = Visibility.Visible;
-                LblBasicCode.Text = "코드를 입력하세요";
-                isValid = false;
-            }
-            else if(Logic.DataAccess.GetSettings().Where(s=>s.BasicCode.Equals(TxtBasicCode.Text)).Count()>0){
-                LblBasicCode.Visibility = Visibility.Visible;
-                LblBasicCode.Text = "중복코드가 존재합니다";
-                isValid = false;
-            }
-            if (string.IsNullOrEmpty(TxtCodeName.Text))
-            {
-                LblCodeName.Visibility = Visibility.Visible;
-                LblCodeName.Text = "코드를 입력하세요";
-                isValid = false;
-            }
+            //if (string.IsNullOrEmpty(TxtBasicCode.Text))
+            //{
+            //    LblBasicCode.Visibility = Visibility.Visible;
+            //    LblBasicCode.Text = "코드를 입력하세요";
+            //    isValid = false;
+            //}
+            //else if(Logic.DataAccess.GetSettings().Where(s=>s.BasicCode.Equals(TxtBasicCode.Text)).Count()>0){
+            //    LblBasicCode.Visibility = Visibility.Visible;
+            //    LblBasicCode.Text = "중복코드가 존재합니다";
+            //    isValid = false;
+            //}
+            //if (string.IsNullOrEmpty(TxtCodeName.Text))
+            //{
+            //    LblCodeName.Visibility = Visibility.Visible;
+            //    LblCodeName.Text = "코드를 입력하세요";
+            //    isValid = false;
+            //}
             return isValid;
         }
 
         private async void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
             var setting = GrdData.SelectedItem as Model.Settings;//형변환 선택한 객체를 수정
-            setting.CodeName = TxtCodeName.Text;
-            setting.CodeDesc = TxtCodeDesc.Text;
+            //setting.CodeName = TxtCodeName.Text;
+            //setting.CodeDesc = TxtCodeDesc.Text;
             setting.ModDate = DateTime.Now;
             setting.ModID = "MRP";
 
@@ -186,10 +186,10 @@ namespace MRPApp.View.Schedule
 
         private void ClearInputs()
         {
-            TxtBasicCode.IsReadOnly = false;
-            TxtBasicCode.Background = new SolidColorBrush(Colors.White);
+            //TxtBasicCode.IsReadOnly = false;
+            //TxtBasicCode.Background = new SolidColorBrush(Colors.White);
 
-            TxtBasicCode.Text = TxtCodeName.Text = TxtCodeDesc.Text = string.Empty;//클리어링
+            //TxtBasicCode.Text = TxtCodeName.Text = TxtCodeDesc.Text = string.Empty;//클리어링
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
@@ -205,13 +205,13 @@ namespace MRPApp.View.Schedule
             try
             {
                 var setting = GrdData.SelectedItem as Model.Settings;//형변환
-                TxtBasicCode.Text = setting.BasicCode;
-                TxtCodeName.Text = setting.CodeName;
-                TxtCodeDesc.Text = setting.CodeDesc;
+                //TxtBasicCode.Text = setting.BasicCode;
+                //TxtCodeName.Text = setting.CodeName;
+                //TxtCodeDesc.Text = setting.CodeDesc;
 
-                //컨트롤 조작-->BasicCode는 PK이다.
-                TxtBasicCode.IsReadOnly = true;//값을 지우려고 해도 지워지지 않는다.
-                TxtBasicCode.Background = new SolidColorBrush(Colors.LightGray);
+                ////컨트롤 조작-->BasicCode는 PK이다.
+                //TxtBasicCode.IsReadOnly = true;//값을 지우려고 해도 지워지지 않는다.
+                //TxtBasicCode.Background = new SolidColorBrush(Colors.LightGray);
             }
             catch (Exception ex)
             {
