@@ -21,7 +21,7 @@ namespace MRPApp.View.Schedule
         {
             try
             {
-                LoadGridData();
+                LoadGridData();//테이블데이터 그리드 표시
                 InitErrorMessage();
             }
             catch (Exception ex)
@@ -33,14 +33,14 @@ namespace MRPApp.View.Schedule
 
         private void InitErrorMessage()
         {
-            LblPlantCode.Visibility = LblSchDate.Visibility = LblSchEndTime.Visibility = LblSchLoadTime.Visibility = LblSchStartTime.Visibility = Visibility.Hidden;
 
+            LblPlantCode.Visibility = LblSchDate.Visibility = LblSchEndTime.Visibility = LblSchLoadTime.Visibility = LblSchStartTime.Visibility = LblSchAmount.Visibility=LblSchFacilityID.Visibility=Visibility.Hidden;
         }
 
-        private void LoadGridData()
+        private void LoadGridData()//일반적인 명칭을 쓰는 것이 좋다. 그러면 안에 있는 명칭만 쓰면 된다.
         {
-            List<Model.Settings> settings = Logic.DataAccess.GetSettings();
-            this.DataContext = settings;
+            List<Model.Schdules> list = Logic.DataAccess.GetSchedules();
+            this.DataContext = list;
         }
 
         private void BtnEditUser_Click(object sender, RoutedEventArgs e)
@@ -186,18 +186,23 @@ namespace MRPApp.View.Schedule
 
         private void ClearInputs()
         {
-            //TxtBasicCode.IsReadOnly = false;
-            //TxtBasicCode.Background = new SolidColorBrush(Colors.White);
-
-            //TxtBasicCode.Text = TxtCodeName.Text = TxtCodeDesc.Text = string.Empty;//클리어링
+            TxtSchIdx.Text = "";
+            CboPlantCode.SelectedItem = null;
+            DtpSchDate.Text = "";
+            TxtSchLoadTime.Text = "";
+            TmpSchStartTime.SelectedDateTime = null;
+            TmpSchEndTime.SelectedDateTime = null;
+            CboSchFacilityID.SelectedItem = null;
+            NudSchAmount.Value = 0;
+            CboPlantCode.Focus();
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            var search = TxtSearch.Text.Trim();//화이트 스페이스 날린다.
+            var search = DtpSearchDate.Text;
 
-            var settings=Logic.DataAccess.GetSettings().Where(s => s.CodeName.Contains(search)).ToList();
-            this.DataContext = settings;
+            var list = Logic.DataAccess.GetSchedules().Where(s => s.SchDate.Equals(search)).ToList();
+            this.DataContext = list;
         }
 
         private void GrdData_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)

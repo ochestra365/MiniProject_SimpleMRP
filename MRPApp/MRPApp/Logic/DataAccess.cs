@@ -35,6 +35,14 @@ namespace MRPApp.Logic
             }
         }
 
+        internal static List<Schdules> GetSchedules()
+        {
+            List<Model.Schdules> list;
+            using (var ctx = new MRPEntities())
+                list = ctx.Schdules.ToList();
+            return list;
+        }
+
         public static int DelSettings(Settings item)//그리드에 올라간 데이터라서 정확하게 지울 수 없다. 엔티티프레임워크에서 DB와 다 연관되어 있다. 정확한 데이터를 지우기 위해 찾은 데이터를 지우는 것이다.
         {
             using (var ctx = new MRPEntities())

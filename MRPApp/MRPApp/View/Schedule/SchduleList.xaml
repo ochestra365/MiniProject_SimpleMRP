@@ -154,7 +154,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="공정일자"></Label>
-                <TextBox x:Name="TxtSearch" Width="200" Margin="8"  KeyDown="TxtSearch_KeyDown"></TextBox>
+                <DatePicker x:Name="DtpSearchDate" Margin="8" Width="120"></DatePicker>
                 <Button x:Name="BtnSearch" Content="검색" Margin="8" Width="80" FontSize="14" Background="CornflowerBlue" Click="BtnSearch_Click"></Button>
             </StackPanel>
             <DataGrid x:Name="GrdData" 
