@@ -74,7 +74,7 @@
                 <TextBox x:Name="TxtSchIdx" Margin="3" Width="200" Text="" FontSize="14" IsReadOnly="True" mah:TextBoxHelper.Watermark="순번창(입력불가)" Background="LightGray"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                <ComboBox x:Name="CboPlantCode" Margin="3" Width="200" mah:TextBoxHelper.Watermark="공장선택"/>
+                <ComboBox x:Name="CboPlantCode" Margin="3" Width="200" mah:TextBoxHelper.Watermark="공장선택" DisplayMemberPath="CodeName" SelectedValuePath="BasicCode"/><!-- PK값 경로를 따라서 화면에 띄우는 디스플레이 경로는 해당 컬럼으로 하겠다.-->
                 <TextBlock x:Name="LblPlantCode" Text="ErrorMessage" Foreground="OrangeRed"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
@@ -94,7 +94,7 @@
                 <TextBlock x:Name="LblSchEndTime" Text="ErrorMessage" Foreground="OrangeRed"/>
             </StackPanel>
             <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
-                <ComboBox x:Name="CboSchFacilityID" Margin="3" Width="200" mah:TextBoxHelper.Watermark="공정 설비 선택"/>
+                <ComboBox x:Name="CboSchFacilityID" Margin="3" Width="200" mah:TextBoxHelper.Watermark="공정 설비 선택" DisplayMemberPath="CodeName" SelectedValuePath="BasicCode"/>
                 <TextBlock x:Name="LblSchFacilityID" Text="ErrorMessage" Foreground="OrangeRed"/>
             </StackPanel>
             <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
@@ -165,7 +165,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding SchIdx}" Header="순번" Width="100" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PlantCode}" Header="공장" Width="1*" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding SchDate}" Header="공정일" Width="1*" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding SchDate, StringFormat='yyyy-MM-dd'}" Header="공정일" Width="1*" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding SchAmount}" Header="계획수량" Width="1*" IsReadOnly="True" />
                     <DataGridTextColumn  Header="" Width="10" IsReadOnly="True" /><!--그냥 더미 컬럼 여백 조정-->
                 </DataGrid.Columns>

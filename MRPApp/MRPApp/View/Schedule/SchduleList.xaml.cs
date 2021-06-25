@@ -21,6 +21,7 @@ namespace MRPApp.View.Schedule
         {
             try
             {
+                LoadControlData();//콤보박스 데이터 로딩 메서드
                 LoadGridData();//테이블데이터 그리드 표시
                 InitErrorMessage();
             }
@@ -29,6 +30,15 @@ namespace MRPApp.View.Schedule
                 Commons.LOGGER.Error($"예외발생 StoreList Loaded : {ex}");
                 throw ex;
             }
+        }
+
+        private void LoadControlData()
+        {
+            var plantCodes = Logic.DataAccess.GetSettings().Where(c=>c.BasicCode.Contains("PC01")).ToList();
+            CboPlantCode.ItemsSource = plantCodes;
+
+            var facilityIds = Logic.DataAccess.GetSettings().Where(c => c.BasicCode.Contains("FAC1")).ToList();
+            CboSchFacilityID.ItemsSource = facilityIds;
         }
 
         private void InitErrorMessage()
@@ -200,7 +210,6 @@ namespace MRPApp.View.Schedule
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
             var search = DtpSearchDate.Text;
-
             var list = Logic.DataAccess.GetSchedules().Where(s => s.SchDate.Equals(search)).ToList();
             this.DataContext = list;
         }
@@ -209,14 +218,15 @@ namespace MRPApp.View.Schedule
         {
             try
             {
-                var setting = GrdData.SelectedItem as Model.Settings;//형변환
-                //TxtBasicCode.Text = setting.BasicCode;
-                //TxtCodeName.Text = setting.CodeName;
-                //TxtCodeDesc.Text = setting.CodeDesc;
-
-                ////컨트롤 조작-->BasicCode는 PK이다.
-                //TxtBasicCode.IsReadOnly = true;//값을 지우려고 해도 지워지지 않는다.
-                //TxtBasicCode.Background = new SolidColorBrush(Colors.LightGray);
+                var item = GrdData.SelectedItem as Model.Schdules;
+                TxtSchIdx.Text = item.SchIdx.ToString();
+                CboPlantCode.SelectedItem = item.PlantCode;
+                DtpSchDate.Text = item.SchDate.ToString();
+                TxtSchLoadTime.Text = item.SchLoadTime.ToString();
+                TmpSchStartTime.SelectedDateTime = null;//item.SchStartTime;
+                TmpSchEndTime.SelectedDateTime = null;
+                CboSchFacilityID.SelectedItem = item.SchFacilityID;
+                NudSchAmount.Value = item.SchAmount;
             }
             catch (Exception ex)
             {
