@@ -1,8 +1,8 @@
 # MiniProject_SimpleMRP
 공정관리 with RasberryPi
-미니프로젝트 데스크탑앱(ERP 재고관리)--누겟패키지를 통한 DB연동 및 소스 코드 효율화를 통해 사용자 친화적인 UI를 신속하게 개발 가능
+미니프로젝트 데스크탑앱(자동화 모니터링)-- 데이터 송수신은 MQTT, DB 연동은 MRP 엔티티
 -------------
-<img src="https://github.com/ochestra365/StudyDesktopApp/blob/main/WPFApp/WpfAdvBank/FineDustMonApp/Git_hub_Image/%EC%88%98%EB%8B%AC.png" width="40%" height="30%" >
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EC%84%BC%EC%8B%B1%20%EB%A8%B8%EC%8B%A0.jpg" width="40%" height="30%" >
 
 주로하는 실수
 -------------
@@ -15,12 +15,6 @@ ERP 시스템에 대하여 개발해 볼 것이다!!
 -------------
 ##목차<br><br>
 * ![Helper](https://github.com/ochestra365/MiniProject_Desktop/blob/main/WpfSMSApp/Helper/Commons.cs)<br>
-* ![Logic.DataAccess](https://github.com/ochestra365/MiniProject_Desktop/blob/main/WpfSMSApp/Logic/DataAccess.cs)<br>
-* ![View](https://github.com/ochestra365/MiniProject_Desktop/tree/main/WpfSMSApp/View)<br>
-* ![Mainxaml](https://github.com/ochestra365/MiniProject_Desktop/blob/main/WpfSMSApp/MainWindow.xaml)<br>
-* ![Mainxaml.cs](https://github.com/ochestra365/MiniProject_Desktop/blob/main/WpfSMSApp/MainWindow.xaml.cs)<br>
-
-* ![MahApps_GetStarted](https://mahapps.com/docs/guides/quick-start)<br><br>
 
 ##설명
 -------------
