@@ -36,6 +36,7 @@ namespace MRPApp.View.Schedule
         {
             var plantCodes = Logic.DataAccess.GetSettings().Where(c=>c.BasicCode.Contains("PC01")).ToList();
             CboPlantCode.ItemsSource = plantCodes;
+            CboGrdPlantCode.ItemsSource = plantCodes;
 
             var facilityIds = Logic.DataAccess.GetSettings().Where(c => c.BasicCode.Contains("FAC1")).ToList();
             CboSchFacilityID.ItemsSource = facilityIds;
@@ -115,8 +116,11 @@ namespace MRPApp.View.Schedule
             item.PlantCode = CboPlantCode.SelectedValue.ToString();
             item.SchDate = DateTime.Parse(DtpSchDate.Text);
             item.SchLoadTime = int.Parse(TxtSchLoadTime.Text);
-            item.SchStartTime = TmpSchStartTime.SelectedDateTime.Value.TimeOfDay;
-            item.SchEndTime = TmpSchEndTime.SelectedDateTime.Value.TimeOfDay;
+            if(TmpSchStartTime.SelectedDateTime!=null)
+                item.SchStartTime = TmpSchStartTime.SelectedDateTime.Value.TimeOfDay;
+            if (TmpSchEndTime.SelectedDateTime != null)
+                item.SchEndTime = TmpSchEndTime.SelectedDateTime.Value.TimeOfDay;
+
             item.SchFacilityID = CboSchFacilityID.SelectedValue.ToString();
             item.SchAmount = (int)NudSchAmount.Value;
 
@@ -163,14 +167,16 @@ namespace MRPApp.View.Schedule
                 isValid = false;
             }
 
-            // 공장별로 공정일이 DB값이 있으면 입력되면 안된다.
-            // PC010001(수원) 2021-06-24 또 넣으면 안된다.
-            var result = Logic.DataAccess.GetSchedules().Where(s => s.PlantCode.Equals(CboPlantCode.SelectedValue.ToString())).Where(d => d.SchDate.Equals(DateTime.Parse(DtpSchDate.Text))).Count();
-            if (result > 0)
+
+            if(CboPlantCode.SelectedValue!=null&&string.IsNullOrEmpty(DtpSchDate.Text))
             {
-                LblSchDate.Visibility = Visibility.Visible;
-                LblSchDate.Text = "해당 공장의 공정일에 계획이 이미 있습니다.";
-                isValid = false;
+                var result = Logic.DataAccess.GetSchedules().Where(s => s.PlantCode.Equals(CboPlantCode.SelectedValue.ToString())).Where(d => d.SchDate.Equals(DateTime.Parse(DtpSchDate.Text))).Count();
+                if (result > 0)
+                {
+                    LblSchDate.Visibility = Visibility.Visible;
+                    LblSchDate.Text = "해당 공장의 공정일에 계획이 이미 있습니다.";
+                    isValid = false;
+                }
             }
 
             if (string.IsNullOrEmpty(TxtSchLoadTime.Text))
@@ -261,7 +267,7 @@ namespace MRPApp.View.Schedule
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
             var search = DtpSearchDate.Text;
-            var list = Logic.DataAccess.GetSchedules().Where(s => s.SchDate.Equals(search)).ToList();
+            var list = Logic.DataAccess.GetSchedules().Where(s => s.SchDate.Equals(DateTime.Parse(search))).ToList();
             this.DataContext = list;
         }
 
@@ -274,8 +280,10 @@ namespace MRPApp.View.Schedule
                 CboPlantCode.SelectedValue = item.PlantCode;
                 DtpSchDate.Text = item.SchDate.ToString();
                 TxtSchLoadTime.Text = item.SchLoadTime.ToString();
-                TmpSchStartTime.SelectedDateTime = new DateTime(item.SchStartTime.Value.Ticks);
-                TmpSchEndTime.SelectedDateTime = new DateTime(item.SchEndTime.Value.Ticks); 
+                if(item.SchStartTime!=null)
+                    TmpSchStartTime.SelectedDateTime = new DateTime(item.SchStartTime.Value.Ticks);
+                if(item.SchEndTime!=null)
+                    TmpSchEndTime.SelectedDateTime = new DateTime(item.SchEndTime.Value.Ticks); 
                 CboSchFacilityID.SelectedItem = item.SchFacilityID;
                 NudSchAmount.Value = item.SchAmount;
             }

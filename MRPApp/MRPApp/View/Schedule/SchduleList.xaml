@@ -163,8 +163,14 @@
                       Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
                       ItemsSource="{Binding}" SelectedCellsChanged="GrdData_SelectedCellsChanged" Margin="0,48,0,2" Grid.RowSpan="2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding SchIdx}" Header="순번" Width="100" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding PlantCode}" Header="공장" Width="1*" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding SchIdx}" Header="순번" Width="100" />
+                    <!--<DataGridTextColumn Binding="{Binding PlantCode}" Header="공장" Width="1*" IsReadOnly="True" />-->
+                    <DataGridComboBoxColumn x:Name="CboGrdPlantCode" 
+                                            Header="공장" Width="1*" 
+                                            DisplayMemberPath="CodeName" 
+                                            SelectedValuePath="BasicCode"
+                                            SelectedValueBinding="{Binding PlantCode}" 
+                                            />
                     <DataGridTextColumn Binding="{Binding SchDate, StringFormat='yyyy-MM-dd'}" Header="공정일" Width="1*" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding SchAmount}" Header="계획수량" Width="1*" IsReadOnly="True" />
                     <DataGridTextColumn  Header="" Width="10" IsReadOnly="True" /><!--그냥 더미 컬럼 여백 조정-->
