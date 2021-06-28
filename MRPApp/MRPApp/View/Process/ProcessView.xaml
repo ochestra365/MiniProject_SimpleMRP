@@ -50,6 +50,10 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Button Content="시작" x:Name="BtnStartProcess" FontSize="12" Background="DarkSlateBlue" Foreground="White" Width="80" HorizontalAlignment="Left" Margin="3" Click="BtnStartProcess_Click"></Button>
+            <!--LIKE HMI-->
+            <Canvas Grid.Row="1">
+                <Image HorizontalAlignment="Left" Height="100" Width="100" VerticalAlignment="Top" Source="/MRPApp;component/Resources/gear.png"></Image>
+            </Canvas>
         </Grid>
         <!-- 컨텐츠영역 끝 -->
         <!-- 모니터링 영역-->
