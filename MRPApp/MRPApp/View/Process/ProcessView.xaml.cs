@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace MRPApp.View.Process
 {
@@ -64,7 +66,19 @@ namespace MRPApp.View.Process
 
         private void BtnStartProcess_Click(object sender, RoutedEventArgs e)
         {
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 0;
+            da.To = 360;
+            da.Duration = new Duration(TimeSpan.FromSeconds(currSchedule.SchLoadTime));//일정 계획로드타임
+           // da.RepeatBehavior = RepeatBehavior.Forever;//무한 반복으로 돈다.
 
+            RotateTransform rt = new RotateTransform();
+            Gear1.RenderTransform = rt;
+            Gear1.RenderTransformOrigin = new Point(0.5, 0.5);
+            Gear2.RenderTransform = rt;
+            Gear2.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            rt.BeginAnimation(RotateTransform.AngleProperty, da);
         }
     }
 }
