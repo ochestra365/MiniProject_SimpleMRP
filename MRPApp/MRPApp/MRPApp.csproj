@@ -502,6 +502,7 @@
       <DependentUpon>MRPModel.edmx</DependentUpon>
       <LastGenOutput>MRPModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\belt2.png" />
     <Resource Include="Resources\gear.png" />
     <Resource Include="Resources\Sensor.png" />
   </ItemGroup>

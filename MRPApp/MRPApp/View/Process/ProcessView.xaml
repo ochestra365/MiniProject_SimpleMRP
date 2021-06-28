@@ -9,7 +9,8 @@
     d:DesignHeight="630" d:DesignWidth="1200"
     Title="ProcessView" Loaded="Page_Loaded">
     <Page.Resources>
-        <Style TargetType="Label"><!-- {x:Type Label} -->
+        <Style TargetType="Label">
+            <!-- {x:Type Label} -->
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -34,15 +35,15 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="380" />
         </Grid.ColumnDefinitions>
-    
+
         <!-- 제목입력 시작 -->
         <Label Grid.Row="0" Grid.Column="1" Content="공정모니터링" FontSize="26" FontWeight="ExtraBold"
                VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" />
         <!-- 제목입력 끝 -->
-        
+
         <!-- 버튼영역 시작 -->
         <!-- 버튼영역 끝 -->
-        
+
         <!-- 컨텐츠영역 시작 -->
         <Grid Grid.Row="1" Grid.Column="1" Margin="5">
             <Grid.RowDefinitions>
@@ -52,7 +53,10 @@
             <Button Content="시작" x:Name="BtnStartProcess" FontSize="12" Background="DarkSlateBlue" Foreground="White" Width="80" HorizontalAlignment="Left" Margin="3" Click="BtnStartProcess_Click"></Button>
             <!--LIKE HMI-->
             <Canvas Grid.Row="1">
-                <Image HorizontalAlignment="Left" Height="100" Width="100" VerticalAlignment="Top" Source="/MRPApp;component/Resources/gear.png"></Image>
+                <Image HorizontalAlignment="Left" Height="100" Width="100" VerticalAlignment="Top" Source="/MRPApp;component/Resources/gear.png" Canvas.Left="104" Canvas.Top="250" x:Name="Gear1"></Image>
+                <Image HorizontalAlignment="Left" Height="100" Width="100" VerticalAlignment="Top" Source="/MRPApp;component/Resources/gear.png" Canvas.Left="615" Canvas.Top="250" x:Name="Gear2"></Image>
+                <Image x:Name="Sensor" Width="100" Height="100" Source="/MRPApp;component/Resources/Sensor.png" Canvas.Left="520" Canvas.Top="28" RenderTransformOrigin="2.101,0.483"></Image>
+                <Image Source="/MRPApp;component/Resources/belt2.png" Canvas.Left="104" Canvas.Top="237"></Image>
             </Canvas>
         </Grid>
         <!-- 컨텐츠영역 끝 -->
