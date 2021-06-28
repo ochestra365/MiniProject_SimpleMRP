@@ -502,6 +502,8 @@
       <DependentUpon>MRPModel.edmx</DependentUpon>
       <LastGenOutput>MRPModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="깃에 올릴 사진\MQTT Explorer.png" />
+    <Resource Include="깃에 올릴 사진\데이터 송수신 성공.png" />
     <Resource Include="깃에 올릴 사진\MQTT.png" />
     <Resource Include="깃에 올릴 사진\공정계획.png" />
     <Resource Include="깃에 올릴 사진\공정모니터링.png" />
