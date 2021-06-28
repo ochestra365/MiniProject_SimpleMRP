@@ -66,10 +66,11 @@ namespace MRPApp.View.Process
 
         private void BtnStartProcess_Click(object sender, RoutedEventArgs e)
         {
+            // 기어 애니메이션 속성
             DoubleAnimation da = new DoubleAnimation();
             da.From = 0;
             da.To = 360;
-            da.Duration = new Duration(TimeSpan.FromSeconds(currSchedule.SchLoadTime));//일정 계획로드타임
+            da.Duration = TimeSpan.FromSeconds(currSchedule.SchLoadTime);//일정 계획로드타임
            // da.RepeatBehavior = RepeatBehavior.Forever;//무한 반복으로 돈다.
 
             RotateTransform rt = new RotateTransform();
@@ -79,6 +80,14 @@ namespace MRPApp.View.Process
             Gear2.RenderTransformOrigin = new Point(0.5, 0.5);
 
             rt.BeginAnimation(RotateTransform.AngleProperty, da);
+            //제품 애니메이션 속성
+            DoubleAnimation ma = new DoubleAnimation();
+            ma.From = 154;
+            ma.To = 540;//옮겨지는 x값의 최대값
+            ma.Duration = TimeSpan.FromSeconds(currSchedule.SchLoadTime);
+            ma.AccelerationRatio = 0.5;
+           // ma.AutoReverse = true;
+            Product.BeginAnimation(Canvas.LeftProperty, ma);
         }
     }
 }
