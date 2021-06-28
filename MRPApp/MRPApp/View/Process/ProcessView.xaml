@@ -56,7 +56,8 @@
                 <Image HorizontalAlignment="Left" Height="100" Width="100" VerticalAlignment="Top" Source="/MRPApp;component/Resources/gear.png" Canvas.Left="104" Canvas.Top="250" x:Name="Gear1"></Image>
                 <Image HorizontalAlignment="Left" Height="100" Width="100" VerticalAlignment="Top" Source="/MRPApp;component/Resources/gear.png" Canvas.Left="615" Canvas.Top="250" x:Name="Gear2"></Image>
                 <Image x:Name="Sensor" Width="100" Height="100" Source="/MRPApp;component/Resources/Sensor.png" Canvas.Left="520" Canvas.Top="28" RenderTransformOrigin="2.101,0.483"></Image>
-                <Image Source="/MRPApp;component/Resources/belt2.png" Canvas.Left="104" Canvas.Top="237"></Image>
+                <Image Source="/MRPApp;component/Resources/belt2.png" Canvas.Left="81" Canvas.Top="237" Width="654"></Image>
+                <Rectangle Height="50" Width="50" Canvas.Left="154" Canvas.Top="187" x:Name="Product" Stroke="Black" Fill="Gray"></Rectangle>
             </Canvas>
         </Grid>
         <!-- 컨텐츠영역 끝 -->
