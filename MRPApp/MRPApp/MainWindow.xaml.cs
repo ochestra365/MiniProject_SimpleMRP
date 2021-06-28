@@ -19,6 +19,7 @@ using MRPApp.View.Account;
 using MRPApp.View.Store;
 using MRPApp.View.Setting;
 using MRPApp.View.Schedule;
+using System.Configuration;
 
 namespace MRPApp
 {
@@ -40,6 +41,9 @@ namespace MRPApp
         {
             /*if (Commons.LOGINED_USER != null)
                 BtnLoginedId.Content = $"{Commons.LOGINED_USER.UserEmail} ({Commons.LOGINED_USER.UserName})";*/
+            var temp = ConfigurationManager.AppSettings.Get("Test");
+            BtnPlantName.Content = temp;
+            
         }
        
         private async void BtnSchdule_Click(object sender, RoutedEventArgs e)

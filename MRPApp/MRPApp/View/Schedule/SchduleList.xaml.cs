@@ -217,8 +217,79 @@ namespace MRPApp.View.Schedule
             return isValid;
         }
 
+        //수정 데이터 검증 데이터
+        public bool IsValiUpdate()
+        {
+            var isValid = true;
+            InitErrorMessage();
+
+
+            if (CboPlantCode.SelectedValue == null)
+            {
+                LblPlantCode.Visibility = Visibility.Visible;
+                LblPlantCode.Text = "공장을 선택하세요";
+                isValid = false;
+            }
+            if (string.IsNullOrEmpty(DtpSchDate.Text))
+            {
+                LblSchDate.Visibility = Visibility.Visible;
+                LblSchDate.Text = "공정일을 입력하세요";
+                isValid = false;
+            }
+
+
+            /*if (CboPlantCode.SelectedValue != null && string.IsNullOrEmpty(DtpSchDate.Text))
+            {
+                var result = Logic.DataAccess.GetSchedules().Where(s => s.PlantCode.Equals(CboPlantCode.SelectedValue.ToString())).Where(d => d.SchDate.Equals(DateTime.Parse(DtpSchDate.Text))).Count();
+                if (result > 0)
+                {
+                    LblSchDate.Visibility = Visibility.Visible;
+                    LblSchDate.Text = "해당 공장의 공정일에 계획이 이미 있습니다.";
+                    isValid = false;
+                }
+            }*/
+
+            if (string.IsNullOrEmpty(TxtSchLoadTime.Text))
+            {
+                LblSchLoadTime.Visibility = Visibility.Visible;
+                LblSchLoadTime.Text = "로드타임을 입력하세요";
+                isValid = false;
+            }
+            if (CboSchFacilityID.SelectedValue == null)
+            {
+                LblSchFacilityID.Visibility = Visibility.Visible;
+                LblSchFacilityID.Text = "공정설비를 선택하세요";
+                isValid = false;
+            }
+            if (NudSchAmount.Value <= 0)
+            {
+                LblSchAmount.Visibility = Visibility.Visible;
+                LblSchAmount.Text = "계획수량은 0개 이상입니다.";
+                isValid = false;
+            }
+            //if (string.IsNullOrEmpty(TxtBasicCode.Text))
+            //
+            //    LblBasicCode.Visibility = Visibility.Visible;
+            //    LblBasicCode.Text = "코드를 입력하세요";
+            //    isValid = false;
+            //}
+            //else if(Logic.DataAccess.GetSettings().Where(s=>s.BasicCode.Equals(TxtBasicCode.Text)).Count()>0){
+            //    LblBasicCode.Visibility = Visibility.Visible;
+            //    LblBasicCode.Text = "중복코드가 존재합니다";
+            //    isValid = false;
+            //}
+            //if (string.IsNullOrEmpty(TxtCodeName.Text))
+            //{
+            //    LblCodeName.Visibility = Visibility.Visible;
+            //    LblCodeName.Text = "코드를 입력하세요";
+            //    isValid = false;
+            //}
+            return isValid;
+        }
+
         private async void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if (IsValiUpdate() != true) return;
             var item = GrdData.SelectedItem as Model.Schdules;
             item.PlantCode = CboPlantCode.SelectedValue.ToString();
             item.SchDate = DateTime.Parse(DtpSchDate.Text);
@@ -273,6 +344,8 @@ namespace MRPApp.View.Schedule
 
         private void GrdData_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
+            ClearInputs();//완전 초기화
+
             try
             {
                 var item = GrdData.SelectedItem as Model.Schdules;
