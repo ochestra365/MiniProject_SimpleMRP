@@ -32,57 +32,45 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="210" />
+            <ColumnDefinition Width="380" />
         </Grid.ColumnDefinitions>
     
         <!-- 제목입력 시작 -->
-        <Label Grid.Row="0" Grid.Column="1" Content="계정정보" FontSize="26" FontWeight="ExtraBold"
+        <Label Grid.Row="0" Grid.Column="1" Content="공정모니터링" FontSize="26" FontWeight="ExtraBold"
                VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" />
         <!-- 제목입력 끝 -->
         
         <!-- 버튼영역 시작 -->
-        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
-            <Button x:Name="BtnEditMyAccount" 
-                    FontSize="14"
-                    Background="DarkSlateBlue" Foreground="White"
-                    Content="계정정보 수정" Height="50" Margin="5, 10" Click="BtnEditMyAccount_Click">
-            </Button>
-        </StackPanel>
         <!-- 버튼영역 끝 -->
         
         <!-- 컨텐츠영역 시작 -->
         <Grid Grid.Row="1" Grid.Column="1" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="110" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Label Grid.Row="0" Grid.Column="0" Content="순번" />
-            <Label Grid.Row="1" Grid.Column="0" Content="사번" />
-            <Label Grid.Row="2" Grid.Column="0" Content="성" />
-            <Label Grid.Row="3" Grid.Column="0" Content="이름" />
-            <Label Grid.Row="4" Grid.Column="0" Content="이메일" />
-            <Label Grid.Row="5" Grid.Column="0" Content="관리자여부" />
-            <Label Grid.Row="6" Grid.Column="0" Content="활성여부" />
-
-            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtUserID" Text="UserID" />
-            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtUserIdentityNumber" Text="UserIdentityNumber" />
-            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtUserSurName" Text="UserSurName" />
-            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtUserName" Text="UserName" />
-            <TextBlock Grid.Row="4" Grid.Column="1" x:Name="TxtUserEmail" Text="UserEmail" />
-            <TextBlock Grid.Row="5" Grid.Column="1" x:Name="TxtUserAdmin" Text="UserAdmin" />
-            <TextBlock Grid.Row="6" Grid.Column="1" x:Name="TxtUserActivated" Text="UserActivated" />
+            <Button Content="시작" x:Name="BtnStartProcess" FontSize="12" Background="DarkSlateBlue" Foreground="White" Width="80" HorizontalAlignment="Left" Margin="3" Click="BtnStartProcess_Click"></Button>
         </Grid>
         <!-- 컨텐츠영역 끝 -->
+        <!-- 모니터링 영역-->
+        <Grid Grid.Row="1" Grid.Column="2" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="공정일" FontSize="20"/>
+            <Label x:Name="LblProcessDate" Grid.Row="0" Grid.Column="1" Content="2021-06-27" FontSize="20"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="공정로드타임" FontSize="20"/>
+            <Label x:Name="LblSchLoadTime" Grid.Row="1" Grid.Column="1" Content="90초" FontSize="20"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="계획수량" FontSize="20"/>
+            <Label x:Name="LblSchAmount" Grid.Row="2" Grid.Column="1" Content="100개" FontSize="20"/>
+        </Grid>
     </Grid>
 </Page>
