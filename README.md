@@ -41,6 +41,7 @@ MQTT화면을 윈폼으로 구성한 것이다.
 -------------
 <img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%86%A1%EC%88%98%EC%8B%A0%20%EC%84%B1%EA%B3%B5.png" width="80%" height="60%" ><br> 
 <img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/MQTT%20Explorer.png" width="80%" height="60%" ><br> 
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.png" width="80%" height="60%" ><br> 
 ##5. 라즈베리파이 소스코드
 -------------
 * ![Rasberry_PI](https://github.com/ochestra365/Rasberry_python/blob/main/check_publish_app.py)
