@@ -27,10 +27,10 @@
 ##3. 구동화면
 -------------
 <br>
-<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EA%B3%B5%EC%A0%95%EA%B3%84%ED%9A%8D.png" width="40%" height="30%" ><br><br>
-<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EA%B3%B5%EC%A0%95%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81.png" width="40%" height="30%" ><br><br>
-<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EC%84%A4%EC%A0%95.png" width="40%" height="30%" ><br><br>
-<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/MQTT.png" width="40%" height="30%" ><br> MQTT
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EA%B3%B5%EC%A0%95%EA%B3%84%ED%9A%8D.png" width="80%" height="60%" ><br><br>
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EA%B3%B5%EC%A0%95%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81.png" width="80%" height="60%" ><br><br>
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EC%84%A4%EC%A0%95.png" width="80%" height="60%" ><br><br>
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/MQTT.png" width="80%" height="60%" ><br> MQTT
 ##4. DB
 -------------
 
