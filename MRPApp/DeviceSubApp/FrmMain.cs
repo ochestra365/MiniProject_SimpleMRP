@@ -1,15 +1,11 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
@@ -108,13 +104,12 @@ namespace DeviceSubApp
                 using (var conn = new SqlConnection(connectionString)) 
                 {
                     var PrcResult = correctData["PRC_MSG"] == "OK" ? 1 : 0;
-                    string strUpQry = $"UPDATE Process_DEV " +
-                                      $"  SET PrcEndTime = '{DateTime.Now.ToString("HH:mm:ss")}'" +
-                                      $"  , PrcResult = '{PrcResult}' " +
+                    string strUpQry = $"UPDATE Process " +
+                                      $"  SET PrcResult = '{PrcResult}' "+
                                       $"  , ModDate = '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' " +
                                       $"  , ModID = '{"SYS"}' " +
                                       $"  WHERE PrcIdx =  " +
-                                      $"  (SELECT TOP 1 PrcIdx FROM Process_DEV ORDER BY PrcIdx DESC)";
+                                      $"  (SELECT TOP 1 PrcIdx FROM Process ORDER BY PrcIdx DESC)";
 
                     try
                     {
