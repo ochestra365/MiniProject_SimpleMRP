@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -70,15 +72,43 @@ namespace MRPApp.View.Process
             }
         }
         MqttClient client;
-
+        Stopwatch sw = new Stopwatch();
         private void InitConnectMqttBroker()
         {
             var brokerAddress = IPAddress.Parse("210.119.12.99");//MQTT Mosquitto Broker IP;
             client = new MqttClient(brokerAddress);
             
             client.MqttMsgPublishReceived+= Client_MqttMsgPublishReceived;
+            client.Connect("Monitor");
+            //client.Subscribe(new string[] { "factory1/machine1/data/" }, new byte[] { MqttMsgBase, QOS_LEVEL_AT_MOST_ONCE });
+
+            Timer timer = new Timer();
+            timer.Enabled = true;
+            timer.Interval = 1000;
+            timer.Elapsed += Timer_Elapsed;
+            timer.Start();
         }
 
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if(sw.Elapsed.Seconds>=2)//2초 대기후 일처리{
+            {
+                sw.Stop();
+                sw.Reset();
+                //MessageBox.Show(currentData["PRC_MSG"]);
+            }
+        }
+        private void StartSensorAnimation()
+        {
+            DoubleAnimation ba = new DoubleAnimation();
+            ba.From = 1;//이미지 보임
+            ba.To = 0;//이미지 보이지 않음
+            ba.Duration = TimeSpan.FromSeconds(2);
+            ba.AutoReverse = true;
+            //ba.RepeatBehavior = RepeatBehavior.Forever;
+            Sensor.BeginAnimation(OpacityProperty, ba);
+
+        }
         private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             throw new NotImplementedException();
