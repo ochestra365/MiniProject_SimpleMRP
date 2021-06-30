@@ -3,7 +3,7 @@
 미니프로젝트 데스크탑앱(자동화 모니터링)-- 데이터 송수신은 MQTT, DB 연동은 MRP 엔티티
 -------------
 <br>
-<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EC%84%BC%EC%8B%B1%20%EB%A8%B8%EC%8B%A0.jpg" width="40%" height="30%" ><br>
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20KILL.png" width="80%" height="60%" ><br><br>
 
 목차
 ---------------
