@@ -234,6 +234,9 @@
     <Compile Include="View\Process\ProcessView.xaml.cs">
       <DependentUpon>ProcessView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Report\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Schedule\SchduleList.xaml.cs">
       <DependentUpon>SchduleList.xaml</DependentUpon>
     </Compile>
@@ -266,6 +269,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Process\ProcessView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Report\ReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

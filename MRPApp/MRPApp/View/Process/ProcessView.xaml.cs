@@ -81,7 +81,7 @@ namespace MRPApp.View.Process
         private void InitConnectMqttBroker()
         {
             var brokerAddress = IPAddress.Parse("210.119.12.99");//MQTT Mosquitto Broker IP;
-            client = new MqttClient(brokerAddress);
+            //client = new MqttClient(brokerAddress);
             client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
             client.Connect("Monitor");
             client.Subscribe(new string[] { "factory1/machine1/data/" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });

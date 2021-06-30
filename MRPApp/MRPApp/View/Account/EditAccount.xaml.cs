@@ -57,7 +57,7 @@ namespace MRPApp.View.Account
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            bool isValid = true; // 입력된 값이 모두 만족하는지 판별하는 플래그
+           // bool isValid = true; // 입력된 값이 모두 만족하는지 판별하는 플래그
 
             LblUserIdentityNumber.Visibility = LblUserSurName.Visibility =
                     LblUserName.Visibility = LblUserEmail.Visibility =

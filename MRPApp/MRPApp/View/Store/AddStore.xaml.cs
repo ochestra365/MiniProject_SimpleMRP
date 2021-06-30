@@ -57,7 +57,7 @@ namespace MRPApp.View.Store
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            bool isValid = true; // 입력된 값이 모두 만족하는지 판별하는 플래그
+           // bool isValid = true; // 입력된 값이 모두 만족하는지 판별하는 플래그
             LblStoreName.Visibility = LblStoreLocation.Visibility = Visibility.Hidden;
 
             /*var store = new Model.Store();
