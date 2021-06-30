@@ -18,25 +18,39 @@ namespace MRPApp.View.Report
         {
             try
             {
-                /*var user = Commons.LOGINED_USER;
-                TxtUserID.Text = user.UserID.ToString();
-                TxtUserIdentityNumber.Text = user.UserIdentityNumber.ToString();
-                TxtUserSurName.Text = user.UserSurname.ToString();
-                TxtUserName.Text = user.UserName.ToString();
-                TxtUserEmail.Text = user.UserEmail.ToString();
-                TxtUserAdmin.Text = user.UserAdmin.ToString();
-                TxtUserActivated.Text = user.UserActivated.ToString();*/
+                InitControls();
             }
             catch (Exception ex)
             {
-                Commons.LOGGER.Error($"예외발생 MyAccount Loaded : {ex}");
+                Commons.LOGGER.Error($"예외발생 Report Loaded : {ex}");
                 throw ex;
             }
+        }
+
+        private void InitControls()
+        {
+            DtpSearchStartDate.SelectedDate = DateTime.Now.AddDays(-7);
+            DtpSearchEndDate.SelectedDate = DateTime.Now;
         }
 
         private void BtnEditMyAccount_Click(object sender, RoutedEventArgs e)
         {
             //NavigationService.Navigate(new EditAccount()); // 계정정보 수정 화면으로 변경
+        }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsvalidInput())
+            {
+                MessageBox.Show("검색시작");
+            }
+        }
+
+        private bool IsvalidInput()
+        {
+            var result = true;
+            //검증은 To be continued....
+            return result;
         }
     }
 }

@@ -5,17 +5,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:MRPApp.View.Report"
+    xmlns:oxy="http://oxyplot.org/wpf"
     mc:Ignorable="d" 
     d:DesignHeight="630" d:DesignWidth="1200"
     Title="ReportView" Loaded="Page_Loaded">
     <Page.Resources>
-        <Style TargetType="Label"><!-- {x:Type Label} -->
+        <Style TargetType="Label">
+            <!-- {x:Type Label} -->
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Right" />
         </Style>
-
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Margin" Value="10, 0" />
@@ -26,6 +27,7 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
+            <RowDefinition  />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Label Content="검색일자"></Label>
@@ -34,17 +36,27 @@
             <DatePicker x:Name="DtpSearchEndDate" Margin="8" Width="120"></DatePicker>
             <Button x:Name="BtnSearch" Content="검색" Margin="8" Width="80" FontSize="14" Background="CornflowerBlue" Click="BtnSearch_Click"></Button>
         </StackPanel>
-        <!-- 제목입력 시작 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="287*"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <oxy:Plot Grid.ColumnSpan="2">
+                <oxy:Plot.Series>
+                    <oxy:ColumnSeries FillColor="Blue" Title="계획수량"/>
+                    <oxy:ColumnSeries FillColor="Green" Title="성공수량"/>
+                    <oxy:ColumnSeries FillColor="Red" Title="실패수량"/>
+                </oxy:Plot.Series>
+            </oxy:Plot>
+        </Grid>
+        <!--<Grid.Row="1"></Grid.Row>-->
         <Label Grid.Row="0" Grid.Column="1" Content="리포트" FontSize="26" FontWeight="ExtraBold"
                VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" />
-        
-        <!-- 제목입력 끝 -->
-        
-        <!-- 버튼영역 시작 -->
+
+
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"/>
-        <!-- 버튼영역 끝 -->
-        
-        <!-- 컨텐츠영역 시작 -->
-        <!-- 컨텐츠영역 끝 -->
+
+        <StackPanel/>
+
     </Grid>
 </Page>
