@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Input;
 namespace MRPApp.View.Schedule
 {
@@ -34,7 +33,7 @@ namespace MRPApp.View.Schedule
 
         private void LoadControlData()
         {
-            var plantCodes = Logic.DataAccess.GetSettings().Where(c=>c.BasicCode.Contains("PC01")).ToList();
+            var plantCodes = Logic.DataAccess.GetSettings().Where(c => c.BasicCode.Contains("PC01")).ToList();
             CboPlantCode.ItemsSource = plantCodes;
             CboGrdPlantCode.ItemsSource = plantCodes;
 
@@ -45,7 +44,7 @@ namespace MRPApp.View.Schedule
         private void InitErrorMessage()
         {
 
-            LblPlantCode.Visibility = LblSchDate.Visibility = LblSchEndTime.Visibility = LblSchLoadTime.Visibility = LblSchStartTime.Visibility = LblSchAmount.Visibility=LblSchFacilityID.Visibility=Visibility.Hidden;
+            LblPlantCode.Visibility = LblSchDate.Visibility = LblSchEndTime.Visibility = LblSchLoadTime.Visibility = LblSchStartTime.Visibility = LblSchAmount.Visibility = LblSchFacilityID.Visibility = Visibility.Hidden;
         }
 
         private void LoadGridData()//일반적인 명칭을 쓰는 것이 좋다. 그러면 안에 있는 명칭만 쓰면 된다.
@@ -90,7 +89,7 @@ namespace MRPApp.View.Schedule
 
             try
             {
-                
+
             }
             catch (Exception ex)
             {
@@ -101,7 +100,7 @@ namespace MRPApp.View.Schedule
 
         private void BtnExportExcel_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
@@ -116,7 +115,7 @@ namespace MRPApp.View.Schedule
             item.PlantCode = CboPlantCode.SelectedValue.ToString();
             item.SchDate = DateTime.Parse(DtpSchDate.Text);
             item.SchLoadTime = int.Parse(TxtSchLoadTime.Text);
-            if(TmpSchStartTime.SelectedDateTime!=null)
+            if (TmpSchStartTime.SelectedDateTime != null)
                 item.SchStartTime = TmpSchStartTime.SelectedDateTime.Value.TimeOfDay;
             if (TmpSchEndTime.SelectedDateTime != null)
                 item.SchEndTime = TmpSchEndTime.SelectedDateTime.Value.TimeOfDay;
@@ -154,7 +153,7 @@ namespace MRPApp.View.Schedule
             InitErrorMessage();
 
 
-            if(CboPlantCode.SelectedValue == null)
+            if (CboPlantCode.SelectedValue == null)
             {
                 LblPlantCode.Visibility = Visibility.Visible;
                 LblPlantCode.Text = "공장을 선택하세요";
@@ -168,7 +167,7 @@ namespace MRPApp.View.Schedule
             }
 
 
-            if(CboPlantCode.SelectedValue!=null&&string.IsNullOrEmpty(DtpSchDate.Text))
+            if (CboPlantCode.SelectedValue != null && string.IsNullOrEmpty(DtpSchDate.Text))
             {
                 var result = Logic.DataAccess.GetSchedules().Where(s => s.PlantCode.Equals(CboPlantCode.SelectedValue.ToString())).Where(d => d.SchDate.Equals(DateTime.Parse(DtpSchDate.Text))).Count();
                 if (result > 0)
@@ -353,10 +352,10 @@ namespace MRPApp.View.Schedule
                 CboPlantCode.SelectedValue = item.PlantCode;
                 DtpSchDate.Text = item.SchDate.ToString();
                 TxtSchLoadTime.Text = item.SchLoadTime.ToString();
-                if(item.SchStartTime!=null)
+                if (item.SchStartTime != null)
                     TmpSchStartTime.SelectedDateTime = new DateTime(item.SchStartTime.Value.Ticks);
-                if(item.SchEndTime!=null)
-                    TmpSchEndTime.SelectedDateTime = new DateTime(item.SchEndTime.Value.Ticks); 
+                if (item.SchEndTime != null)
+                    TmpSchEndTime.SelectedDateTime = new DateTime(item.SchEndTime.Value.Ticks);
                 CboSchFacilityID.SelectedItem = item.SchFacilityID;
                 NudSchAmount.Value = item.SchAmount;
             }
@@ -371,7 +370,7 @@ namespace MRPApp.View.Schedule
         {
             var setting = GrdData.SelectedItem as Model.Settings;
 
-            if(setting == null)
+            if (setting == null)
             {
                 await Commons.ShowMessageAsync("삭제", "삭제할 코드를 선택하세요");
                 return;
@@ -398,7 +397,7 @@ namespace MRPApp.View.Schedule
                 {
                     Commons.LOGGER.Error($"예외발생 {ex}");
                 }
-               
+
             }
         }
 

@@ -1,14 +1,4 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Microsoft.Win32;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -28,7 +18,7 @@ namespace MRPApp.View.Store
         {
             try
             {
-                
+
             }
             catch (Exception ex)
             {
@@ -73,7 +63,7 @@ namespace MRPApp.View.Store
 
             try
             {
-                
+
             }
             catch (Exception ex)
             {
@@ -84,7 +74,7 @@ namespace MRPApp.View.Store
 
         private void BtnExportExcel_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
     }
 }

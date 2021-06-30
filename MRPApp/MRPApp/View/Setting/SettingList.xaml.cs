@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Input;
+using System.Windows.Media;
 namespace MRPApp.View.Setting
 {
     /// <summary>
@@ -79,7 +79,7 @@ namespace MRPApp.View.Setting
 
             try
             {
-                
+
             }
             catch (Exception ex)
             {
@@ -90,7 +90,7 @@ namespace MRPApp.View.Setting
 
         private void BtnExportExcel_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
@@ -140,7 +140,8 @@ namespace MRPApp.View.Setting
                 LblBasicCode.Text = "코드를 입력하세요";
                 isValid = false;
             }
-            else if(Logic.DataAccess.GetSettings().Where(s=>s.BasicCode.Equals(TxtBasicCode.Text)).Count()>0){
+            else if (Logic.DataAccess.GetSettings().Where(s => s.BasicCode.Equals(TxtBasicCode.Text)).Count() > 0)
+            {
                 LblBasicCode.Visibility = Visibility.Visible;
                 LblBasicCode.Text = "중복코드가 존재합니다";
                 isValid = false;
@@ -196,7 +197,7 @@ namespace MRPApp.View.Setting
         {
             var search = TxtSearch.Text.Trim();//화이트 스페이스 날린다.
 
-            var settings=Logic.DataAccess.GetSettings().Where(s => s.CodeName.Contains(search)).ToList();
+            var settings = Logic.DataAccess.GetSettings().Where(s => s.CodeName.Contains(search)).ToList();
             this.DataContext = settings;
         }
 
@@ -224,7 +225,7 @@ namespace MRPApp.View.Setting
         {
             var setting = GrdData.SelectedItem as Model.Settings;
 
-            if(setting == null)
+            if (setting == null)
             {
                 await Commons.ShowMessageAsync("삭제", "삭제할 코드를 선택하세요");
                 return;
@@ -251,7 +252,7 @@ namespace MRPApp.View.Setting
                 {
                     Commons.LOGGER.Error($"예외발생 {ex}");
                 }
-               
+
             }
         }
 

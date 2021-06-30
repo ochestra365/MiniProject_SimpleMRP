@@ -48,7 +48,7 @@ namespace DeviceSubApp
             Timer.Tick += Timer_Tick;
             Timer.Start();
         }
-
+        // MQTT 브로커(내부적으로 소켓이다.) 소켓에서 데이터를 찍으려고 하니 문제가 발생한다.
         private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             try
@@ -150,6 +150,7 @@ namespace DeviceSubApp
 
         private void UpdateText(string message)//delegate는 파라미터 시그니처가 같아야 한다. 이벤트 핸들러들을 의미한다. 대리자로 처리하는 것이 에러 구문을 띄우는 것이다.
         {
+            //RtbSubcr 리치텍스트 박스
             if (RtbSubscr.InvokeRequired)
             {
                 UpdateTextCallback callback = new UpdateTextCallback(UpdateText);

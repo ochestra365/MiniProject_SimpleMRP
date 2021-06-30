@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
@@ -62,6 +64,7 @@ namespace MRPApp.View.Process
                     LblSchAmount.Content = $"{currSchedule.SchAmount}개";
                     BtnStartProcess.IsEnabled = true;
 
+                    UpdateData();
                     InitConnectMqttBroker();//공정시작시 MQTT 브로커에 연결해야 한다.
                 }
             }
@@ -71,16 +74,17 @@ namespace MRPApp.View.Process
                 throw ex;
             }
         }
+
         MqttClient client;
+        Timer timer = new Timer();
         Stopwatch sw = new Stopwatch();
         private void InitConnectMqttBroker()
         {
             var brokerAddress = IPAddress.Parse("210.119.12.99");//MQTT Mosquitto Broker IP;
             client = new MqttClient(brokerAddress);
-            
-            client.MqttMsgPublishReceived+= Client_MqttMsgPublishReceived;
+            client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
             client.Connect("Monitor");
-            //client.Subscribe(new string[] { "factory1/machine1/data/" }, new byte[] { MqttMsgBase, QOS_LEVEL_AT_MOST_ONCE });
+            client.Subscribe(new string[] { "factory1/machine1/data/" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
             Timer timer = new Timer();
             timer.Enabled = true;
@@ -88,14 +92,35 @@ namespace MRPApp.View.Process
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
         }
-
+        //Stopwatch sw = new Stopwatch();
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            if(sw.Elapsed.Seconds>=2)//2초 대기후 일처리{
+            if (sw.Elapsed.Seconds >= 2) // 2초 대기후 일처리
             {
                 sw.Stop();
                 sw.Reset();
                 //MessageBox.Show(currentData["PRC_MSG"]);
+                if (currentData["PRC_MSG"] == "OK")
+                {
+                    Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
+                     {
+                         Product.Fill = new SolidColorBrush(Colors.Green);
+                     }
+                    ));
+                }
+                else if (currentData["PRC_MSG"] == "FAIL")
+                {
+                    Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
+                    {
+                        Product.Fill = new SolidColorBrush(Colors.Green);
+                    }));
+
+                    Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
+                     {
+                         UpdateData();
+                     }
+                    ));
+                }
             }
         }
         private void StartSensorAnimation()
@@ -111,14 +136,32 @@ namespace MRPApp.View.Process
         }
         private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            throw new NotImplementedException();
-        }
 
+            throw new NotImplementedException();
+            //var message = Encoding.UTF8.GetString(e.Message);
+            //currdata = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
+            //if ()
+        }
+        Dictionary<string, string> currentData = new Dictionary<string, string>();
         private void BtnStartProcess_Click(object sender, RoutedEventArgs e)
         {
             InsertProcessData();
             StartAnimation();// HMI 애니메이션 실행
         }
+
+        //private void StartSensorAnimation()
+        //{
+        //    Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
+        //     {
+        //         DoubleAnimation ba = new DoubleAnimation();
+        //         ba.From = 1;//이미지 보임
+        //        ba.To = 0;//이미지 보이지 않음
+        //        ba.Duration = TimeSpan.FromSeconds(2);
+        //         ba.AutoReverse = true;
+        //         Sensor.BeginAnimation(OpacityProperty, ba);
+        //     }
+        //    ));
+        //}
 
         private async void InsertProcessData()
         {
@@ -140,7 +183,7 @@ namespace MRPApp.View.Process
                 {
                     Commons.LOGGER.Error("공정데이터 입력 실패!");
                     await Commons.ShowMessageAsync("공정오류", "공정시작 오류발생, 관리자 문의");
-                   // return false;
+                    // return false;
                 }
                 else
                 {
@@ -177,9 +220,25 @@ namespace MRPApp.View.Process
             }
             return resultCode;
         }
+        private void UpdateData()
+        {
+            //성공수량
+            var prcOKAmount = Logic.DataAccess.GetProcess().Where(p => p.PrcDate.Equals(DateTime.Now)).Where(p => p.SchIdx.Equals(currSchedule.SchIdx)).Where(p => p.PrcResult.Equals(true)).Count();
+            //실패수량
+            var prcFailAmount= Logic.DataAccess.GetProcess().Where(p => p.PrcDate.Equals(DateTime.Now)).Where(p => p.SchIdx.Equals(currSchedule.SchIdx)).Where(p => p.PrcResult.Equals(false)).Count();
+            //성공률
+            var prcOkRate = 100 * ((double)prcOKAmount / (double)currSchedule.SchAmount);
+            //실패율
+            var prcFailRate= 100 * ((double)prcFailAmount / (double)currSchedule.SchAmount);
 
+            LBlPrcOKAmount.Content = $"{prcOKAmount}개";
+            LBlPrcFailAmount.Content = $"{prcFailAmount}개";
+            LBlPrcOKAmount.Content = $"{prcOkRate}개";
+            LBlPrcFailAmount.Content = $"{prcFailRate}개";
+        }
         private void StartAnimation()
         {
+            Product.Fill = new SolidColorBrush(Colors.Gray);
             // 기어 애니메이션 속성
             DoubleAnimation da = new DoubleAnimation();
             da.From = 0;
@@ -204,5 +263,12 @@ namespace MRPApp.View.Process
             Product.BeginAnimation(Canvas.LeftProperty, ma);
         }
 
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            //자원해제
+            if (client.IsConnected) client.Disconnect();
+            timer.Dispose();
+            //new delete 자원해제가 매우 중요하다.
+        }
     }
 }

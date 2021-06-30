@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace MRPApp.View.Account
 {

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace MRPApp.View.Store
 {
@@ -41,13 +36,13 @@ namespace MRPApp.View.Store
             }
             else
             {
-               /* var cnt = Logic.DataAccess.GetStores().Where(u => u.StoreName.Equals(TxtStoreName.Text)).Count();
-                if (cnt > 0)
-                {
-                    LblStoreName.Visibility = Visibility.Visible;
-                    LblStoreName.Text = "중복된 창고명이 존재합니다";
-                    IsValid = false;
-                }*/
+                /* var cnt = Logic.DataAccess.GetStores().Where(u => u.StoreName.Equals(TxtStoreName.Text)).Count();
+                 if (cnt > 0)
+                 {
+                     LblStoreName.Visibility = Visibility.Visible;
+                     LblStoreName.Text = "중복된 창고명이 존재합니다";
+                     IsValid = false;
+                 }*/
             }
 
             if (string.IsNullOrEmpty(TxtStoreLocation.Text))

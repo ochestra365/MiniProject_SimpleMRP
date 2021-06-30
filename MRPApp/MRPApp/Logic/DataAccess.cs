@@ -1,10 +1,7 @@
 ﻿using MRPApp.Model;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MRPApp.Logic
 {
@@ -14,7 +11,7 @@ namespace MRPApp.Logic
         public static List<Settings> GetSettings()//internal 같은 어쎔블리안에서는 public으로 작동하니까 internal
         {
             List<Settings> settings;//Settings 테이블이랑 매칭이 되어 있다.
-            using (var ctx=new MRPEntities())//SQL서버 직접 연결 시 커넥션스트링과 같은 역할을 한다고 보면 된다. MRPEntities는 연결과 같다
+            using (var ctx = new MRPEntities())//SQL서버 직접 연결 시 커넥션스트링과 같은 역할을 한다고 보면 된다. MRPEntities는 연결과 같다
             {
                 settings = ctx.Settings.ToList();//SELECT
             }
@@ -72,7 +69,7 @@ namespace MRPApp.Logic
         }
         internal static int SetProcess(Process item)
         {
-            using(var ctx= new MRPEntities())
+            using (var ctx = new MRPEntities())
             {
                 ctx.Process.AddOrUpdate(item);//INSERT|UPDATE
                 return ctx.SaveChanges();//COMMIT

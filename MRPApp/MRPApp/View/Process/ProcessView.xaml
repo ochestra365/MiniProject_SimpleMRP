@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:MRPApp.View.Process"
     mc:Ignorable="d" 
     d:DesignHeight="630" d:DesignWidth="1200"
-    Title="ProcessView" Loaded="Page_Loaded">
+    Title="ProcessView" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     <Page.Resources>
         <Style TargetType="Label">
             <!-- {x:Type Label} -->
@@ -68,6 +68,9 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="130"/>
@@ -80,6 +83,15 @@
             <Label x:Name="LblSchLoadTime" Grid.Row="1" Grid.Column="1" Content="90초" FontSize="20"/>
             <Label Grid.Row="2" Grid.Column="0" Content="계획수량" FontSize="20"/>
             <Label x:Name="LblSchAmount" Grid.Row="2" Grid.Column="1" Content="100개" FontSize="20"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="성공수량" FontSize="20" />
+            <Label x:Name="LBlPrcOKAmount" Grid.Row="3" Grid.Column="1" FontSize="20" Content="5개"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="실패수량" FontSize="20" />
+            <Label x:Name="LBlPrcFailAmount" Grid.Row="4" Grid.Column="1" FontSize="20" Content="5개"/>
+
+            <Label Grid.Row="5" Grid.Column="0" Content="성공률" FontSize="20" Foreground="Blue"/>
+            <Label x:Name="LBlPrcOKRate" Grid.Row="5" Grid.Column="1" FontSize="20" Content="20%" Foreground="Blue"/>
+            <Label Grid.Row="6" Grid.Column="0" Content="실패율" FontSize="20" Foreground="Red"/>
+            <Label x:Name="LBlPrcFailRate" Grid.Row="6" Grid.Column="1" FontSize="20" Content="20%" Foreground="Red"/>
         </Grid>
     </Grid>
 </Page>
