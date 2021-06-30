@@ -1,4 +1,4 @@
-# MiniProject_SimpleMRP
+# MiniProject_SimpleMRP(코드분석서 작성하기)
 공정관리 with RasberryPi
 미니프로젝트 데스크탑앱(자동화 모니터링)-- 데이터 송수신은 MQTT, DB 연동은 MRP 엔티티
 -------------
