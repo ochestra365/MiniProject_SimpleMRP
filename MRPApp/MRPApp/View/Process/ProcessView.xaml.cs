@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,7 +54,6 @@ namespace MRPApp.View.Process
                     LblSchLoadTime.Content = "None";
                     LblSchAmount.Content = "None";
                     BtnStartProcess.IsEnabled = false;
-                    //TODO 시작버튼 Disable
                     return;
                 }
                 else
@@ -81,7 +82,7 @@ namespace MRPApp.View.Process
         private void InitConnectMqttBroker()
         {
             var brokerAddress = IPAddress.Parse("210.119.12.99");//MQTT Mosquitto Broker IP;
-            //client = new MqttClient(brokerAddress);
+            client = new MqttClient(brokerAddress);
             client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
             client.Connect("Monitor");
             client.Subscribe(new string[] { "factory1/machine1/data/" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
@@ -99,7 +100,6 @@ namespace MRPApp.View.Process
             {
                 sw.Stop();
                 sw.Reset();
-                //MessageBox.Show(currentData["PRC_MSG"]);
                 if (currentData["PRC_MSG"] == "OK")
                 {
                     Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
@@ -125,22 +125,33 @@ namespace MRPApp.View.Process
         }
         private void StartSensorAnimation()
         {
-            DoubleAnimation ba = new DoubleAnimation();
-            ba.From = 1;//이미지 보임
-            ba.To = 0;//이미지 보이지 않음
-            ba.Duration = TimeSpan.FromSeconds(2);
-            ba.AutoReverse = true;
-            //ba.RepeatBehavior = RepeatBehavior.Forever;
-            Sensor.BeginAnimation(OpacityProperty, ba);
+            Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
+            {
+                DoubleAnimation ba = new DoubleAnimation();
+                ba.From = 1; // 이미지 보임
+                ba.To = 0; // 이미지 보이지 않음
+                ba.Duration = TimeSpan.FromSeconds(2);
+                ba.AutoReverse = true;
+                //ba.RepeatBehavior = RepeatBehavior.Forever;
+
+                Sensor.BeginAnimation(OpacityProperty, ba);
+            }));
 
         }
         private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
 
-            throw new NotImplementedException();
-            //var message = Encoding.UTF8.GetString(e.Message);
-            //currdata = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
-            //if ()
+            var message = Encoding.UTF8.GetString(e.Message);
+            currentData = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
+
+            if (currentData["PRC_MSG"] == "OK" || currentData["PRC_MSG"] == "FAIL")
+            {
+                sw.Stop();
+                sw.Reset();
+                sw.Start();
+
+                StartSensorAnimation();
+            }
         }
         Dictionary<string, string> currentData = new Dictionary<string, string>();
         private void BtnStartProcess_Click(object sender, RoutedEventArgs e)
@@ -149,21 +160,7 @@ namespace MRPApp.View.Process
             StartAnimation();// HMI 애니메이션 실행
         }
 
-        //private void StartSensorAnimation()
-        //{
-        //    Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
-        //     {
-        //         DoubleAnimation ba = new DoubleAnimation();
-        //         ba.From = 1;//이미지 보임
-        //        ba.To = 0;//이미지 보이지 않음
-        //        ba.Duration = TimeSpan.FromSeconds(2);
-        //         ba.AutoReverse = true;
-        //         Sensor.BeginAnimation(OpacityProperty, ba);
-        //     }
-        //    ));
-        //}
-
-        private async void InsertProcessData()
+        private bool InsertProcessData()
         {
             var item = new Model.Process();
             item.SchIdx = currSchedule.SchIdx;
@@ -182,20 +179,20 @@ namespace MRPApp.View.Process
                 if (result == 0)
                 {
                     Commons.LOGGER.Error("공정데이터 입력 실패!");
-                    await Commons.ShowMessageAsync("공정오류", "공정시작 오류발생, 관리자 문의");
-                    // return false;
+                    Commons.ShowMessageAsync("오류", "공정시작 오류발생, 관리자 문의");
+                    return false;
                 }
                 else
                 {
-                    Commons.LOGGER.Info("공정데이터 입력");
-                    //return true;
+                    Commons.LOGGER.Info("공정데이터 입력!");
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Commons.LOGGER.Error($"예외발생 : {ex}");
-                await Commons.ShowMessageAsync("공정오류", "공정시작 오류발생, 관리자 문의");
-                //return false;
+                Commons.ShowMessageAsync("오류", "공정시작 오류발생, 관리자 문의");
+                return false;
             }
         }
         //return true는 공정성공, false는 공정실패
