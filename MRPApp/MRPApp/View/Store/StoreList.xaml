@@ -10,7 +10,7 @@
     d:DesignHeight="630" d:DesignWidth="1200"
     Title="StoreList" Loaded="Page_Loaded">
     <Page.Resources>
-        <Style TargetType="Label"><!-- {x:Type Label} -->
+        <Style TargetType="Label"> 
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -36,12 +36,12 @@
             <ColumnDefinition Width="210" />
         </Grid.ColumnDefinitions>
     
-        <!-- 제목입력 시작 -->
+         제목입력 시작 
         <Label Grid.Row="0" Grid.Column="1" Content="창고리스트" FontSize="26" FontWeight="ExtraBold"
                VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" />
-        <!-- 제목입력 끝 -->
+         제목입력 끝 
         
-        <!-- 버튼영역 시작 -->
+         버튼영역 시작 
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
             <Button x:Name="BtnAddStore" 
                     FontSize="14"
@@ -83,9 +83,9 @@
                 </Button.ContentTemplate>
             </Button>
         </StackPanel>
-        <!-- 버튼영역 끝 -->
+         버튼영역 끝 
         
-        <!-- 컨텐츠영역 시작 -->
+         컨텐츠영역 시작 
         <Grid Grid.Row="1" Grid.Column="1" Margin="5">
             <Grid.RowDefinitions>                
                 <RowDefinition />
@@ -106,6 +106,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <!-- 컨텐츠영역 끝 -->
+         컨텐츠영역 끝 
     </Grid>
 </Page>

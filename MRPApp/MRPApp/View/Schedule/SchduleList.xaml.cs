@@ -79,22 +79,12 @@ namespace MRPApp.View.Schedule
             }
         }
 
-        private void BtnEditStore_Click(object sender, RoutedEventArgs e)
+        private async void BtnEditStore_Click(object sender, RoutedEventArgs e)
         {
             if (GrdData.SelectedItem == null)
             {
-                Commons.ShowMessageAsync("창고수정", "수정할 창고를 선택하세요");
+                await Commons.ShowMessageAsync("창고수정", "수정할 창고를 선택하세요");
                 return;
-            }
-
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                Commons.LOGGER.Error($"예외발생 BtnEditStore_Click : {ex}");
-                throw ex;
             }
         }
 
