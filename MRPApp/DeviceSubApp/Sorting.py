@@ -18,7 +18,7 @@ s2=23
 s3=24
 out=25
 NUM_CYCLES=10
-currtime=dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+currtime=dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')#
 
 #json gernerating 데이터 딕셔너리
 message=''
