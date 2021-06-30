@@ -3,7 +3,7 @@
 미니프로젝트 데스크탑앱(자동화 모니터링)-- 데이터 송수신은 MQTT, DB 연동은 MRP 엔티티
 -------------
 <br>
-<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20KILL.png" width="80%" height="60%" ><br><br>
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EC%84%BC%EC%8B%B1%20%EB%A8%B8%EC%8B%A0.jpg" width="80%" height="60%" ><br><br>
 
 목차
 ---------------
@@ -17,7 +17,7 @@
 
 ##1. 디버깅
 -------------
-src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20KILL.png" width="80%" height="60%" ><br><br>
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20KILL.png" width="80%" height="60%" ><br><br>
 프로그램을 종료해도 백그라운드에서 프로그램이 메모리에 있어서 빌드가 되지 않을 수 있다. 그럴 때는 여기서 KILL해줘야 한다.<br>
 스레드문제인 듯 하다. 이를 해결하려면 페이지가 언로드 될 시 다음의 코드가 시행되도록 설정해줘야 한다.<br>
 ~~~
