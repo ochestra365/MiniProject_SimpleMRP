@@ -63,17 +63,26 @@ namespace MRPApp.View.Report
         {
             if (IsvalidInput())
             {
-                var startDate = ((DateTime)DtpSearchStartDate.SelectedDate).ToString("yyyy-MM-dd");
-                var endDate=((DateTime) DtpSearchEndDate.SelectedDate).ToString("yyyy-MM-dd");
-                var searchResult = Logic.DataAccess.GetReportDatas(startDate, endDate, Commons.PLANTCODE);
-                DisplayChar(searchResult);
+               var startDate = ((DateTime)DtpSearchStartDate.SelectedDate).ToString("yyyy-MM-dd");
+               var endDate = ((DateTime)DtpSearchEndDate.SelectedDate).ToString("yyyy-MM-dd");
+               var searchResult = Logic.DataAccess.GetReportDatas(startDate, endDate, Commons.PLANTCODE);
+               DisplayChar(searchResult);
             }
         }
 
-        private bool IsvalidInput()
+        private bool IsvalidInput()//사용자에러로 박살나는 것을 막기 위함이다.
         {
             var result = true;
-            //검증은 To be continued....
+            if (DtpSearchStartDate.SelectedDate == null || DtpSearchEndDate.SelectedDate == null)
+            {
+                Commons.ShowMessageAsync("검색", "검색할 일자를 선택하세여");
+                result = false;
+            }
+            if (DtpSearchStartDate.SelectedDate > DtpSearchEndDate.SelectedDate)
+            {
+                Commons.ShowMessageAsync("검색", "시작일자가 종료일자보다 최신일 수 없어요");
+                result = false;
+            }
             return result;
         }
     }
