@@ -56,7 +56,10 @@ namespace MRPApp.View.Report
         {
             if (IsvalidInput())
             {
-                MessageBox.Show("검색시작");
+                var startDate = ((DateTime)DtpSearchStartDate.SelectedDate).ToString("yyyy-MM-dd");
+                var endDate=((DateTime) DtpSearchEndDate.SelectedDate).ToString("yyyy-MM-dd");
+                var searchResult = Logic.DataAccess.GetReportDatas(startDate, endDate, Commons.PLANTCODE);
+                DisplayChar();
             }
         }
 

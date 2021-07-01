@@ -1,6 +1,9 @@
 ﻿using MRPApp.Model;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace MRPApp.Logic
@@ -57,6 +60,54 @@ namespace MRPApp.Logic
                 ctx.Schdules.AddOrUpdate(item);//INSERT or UPDATE
                 return ctx.SaveChanges();//COMMIT
             }
+        }
+
+        internal static List<Model.Report> GetReportDatas(string startDate, string endDate, string plantCode)
+        {
+            var connString = ConfigurationManager.ConnectionStrings["MRPConnString"].ToString();
+            var list = new List<Model.Report>();
+            using(var conn=new SqlConnection(connString))//close는 using문이 해준다.
+            {
+                conn.Open();//필수 중요! @버바틴 스트링을 쓰면 바로 해결됨
+                var sqlQuery = $@"SELECT sch.SchIdx, sch.PlantCode, sch.SchAmount, prc.PrcDate,
+                                prc.PrcOKAmount,prc.PrcFailAmount
+                            FROM Schdules AS sch
+                        INNER JOIN(
+                        SELECT smr.SchIdx, smr.PrcDate,
+                                SUM(smr.PrcOK) AS 'PrcOKAmount', SUM(smr.PrcFail) AS 'PrcFailAmount'
+
+                            FROM(
+                                SELECT p.SchIdx, p.PrcDate,
+                                    CASE p.PrcResult WHEN 1 THEN 1 ELSE 0 END AS PrcOK,
+                                    CASE p.PrcResult WHEN 0 THEN 1 ELSE 0 END AS PrcFail
+
+                                FROM Process AS p
+                            ) AS smr
+                        GROUP BY smr.SchIdx, smr.PrcDate
+                        ) AS prc
+
+                            ON sch.SchIdx = prc.SchIdx
+                        WHERE sch.PlantCode = '{plantCode}'
+
+                            AND prc.PrcDate BETWEEN '{startDate}' AND '{endDate}'";
+                //결과값을 우리 것을 넣어서 사용한다.-->날짜로 검색되게 함.
+                SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+                SqlDataReader reader = cmd.ExecuteReader();//reader는 그냥 배열이다. 그래서 우리 코드의 형태로 바꿔서 올려줘야 한다.
+
+                while (reader.Read())
+                {
+                    var tmp = new Report
+                    {
+                        SchIdx = (int)reader["SchIdx"],
+                        PlantCode = reader["PlantCode"].ToString(),
+                        PrcDate = DateTime.Parse(reader["PrcDate"].ToString()),
+                        SchAmount=(int)reader["SchAmount"],
+                        PrcOKAmount=(int)reader["PrcOKAmount"],
+                        PrcFailAmount=(int)reader["PrcFailAmount"]
+                    };
+                }
+            }
+            return list;
         }
 
         internal static List<Process> GetProcess()
