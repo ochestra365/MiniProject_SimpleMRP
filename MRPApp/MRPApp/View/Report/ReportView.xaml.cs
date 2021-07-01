@@ -42,6 +42,7 @@ namespace MRPApp.View.Report
             ChtReport.Series.Add(series1);
             ChtReport.Series.Add(series2);
             ChtReport.Series.Add(series3);
+            //X축 좌표값을 날짜로 표시
             ChtReport.AxisX.First().Labels = list.Select(a => a.PrcDate.ToString("yyyy-MM-dd")).ToList();
         }
 
