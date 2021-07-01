@@ -49,6 +49,8 @@
 초기 공장 설정을 나타낸 것이다.
 <img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/MQTT.png" width="80%" height="60%" ><br> 
 MQTT화면을 윈폼으로 구성한 것이다.
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EB%A6%AC%ED%8F%AC%ED%8A%B8%EC%82%AC%EC%A7%84.png" width="80%" height="60%" ><br> 
+MQTT화면을 윈폼으로 구성한 것이다.
 ##4. DB
 -------------
 <img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%86%A1%EC%88%98%EC%8B%A0%20%EC%84%B1%EA%B3%B5.png" width="80%" height="60%" ><br> 
