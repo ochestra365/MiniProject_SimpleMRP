@@ -105,6 +105,7 @@ namespace MRPApp.Logic
                         PrcOKAmount=(int)reader["PrcOKAmount"],
                         PrcFailAmount=(int)reader["PrcFailAmount"]
                     };
+                    list.Add(tmp);
                 }
             }
             return list;

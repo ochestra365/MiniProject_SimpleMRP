@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,7 +21,6 @@ namespace MRPApp.View.Report
             try
             {
                 InitControls();
-                DisplayChar();
             }
             catch (Exception ex)
             {
@@ -27,18 +28,20 @@ namespace MRPApp.View.Report
                 throw ex;
             }
         }
-
-        private void DisplayChar()
+        
+        private void DisplayChar(List<Model.Report> list)
         {
-            double[] ys1 = new double[] { 10.4, 34.6, 22.1, 15.4, 40.0 };
-            double[] ys2 = new double[] { 9.7, 8.3, 2.6, 3.4, 7.7 };
-
-            var series1 = new LiveCharts.Wpf.ColumnSeries { Title="First Val", Values=new LiveCharts.ChartValues<double>(ys1) };
-            var series2 = new LiveCharts.Wpf.ColumnSeries { Title="Second Val", Values=new LiveCharts.ChartValues<double>(ys2) };
+            int[] schAmount = list.Select(a => (int)a.SchAmount).ToArray();
+            int[] prcOkAmounts = list.Select(a => (int)a.PrcOKAmount).ToArray();
+            int[] prcFailAmounts = list.Select(a => (int)a.PrcFailAmount).ToArray();
+            var series1 = new LiveCharts.Wpf.ColumnSeries { Title="계획수량", Values=new LiveCharts.ChartValues<int>(schAmount) };
+            var series2 = new LiveCharts.Wpf.ColumnSeries { Title="성공수량", Values=new LiveCharts.ChartValues<int>(prcOkAmounts) };
+            var series3 = new LiveCharts.Wpf.ColumnSeries { Title= "실패수량", Values=new LiveCharts.ChartValues<int>(prcFailAmounts) };
             //차트할당
             ChtReport.Series.Clear();
             ChtReport.Series.Add(series1);
             ChtReport.Series.Add(series2);
+            ChtReport.Series.Add(series3);
         }
 
         private void InitControls()
@@ -59,7 +62,7 @@ namespace MRPApp.View.Report
                 var startDate = ((DateTime)DtpSearchStartDate.SelectedDate).ToString("yyyy-MM-dd");
                 var endDate=((DateTime) DtpSearchEndDate.SelectedDate).ToString("yyyy-MM-dd");
                 var searchResult = Logic.DataAccess.GetReportDatas(startDate, endDate, Commons.PLANTCODE);
-                DisplayChar();
+                DisplayChar(searchResult);
             }
         }
 
