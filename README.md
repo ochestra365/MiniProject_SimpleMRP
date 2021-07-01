@@ -1,6 +1,6 @@
 # MiniProject_SimpleMRP(코드분석서 작성하기)
 공정관리 with RasberryPi
-미니프로젝트 데스크탑앱(자동화 모니터링)-- 데이터 송수신은 MQTT, DB 연동은 MRP 엔티티
+미니프로젝트 데스크탑앱(자동화 모니터링)-- 데이터 송수신은 MQTT, DB 연동은 MRP 엔티티 코드 비하인드 및 작업 절차를 실무에서도 확실히 쓸 수 있도록 문서화하기
 -------------
 <br>
 <img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EC%84%BC%EC%8B%B1%20%EB%A8%B8%EC%8B%A0.jpg" width="80%" height="60%" ><br><br>
@@ -48,6 +48,8 @@
 <img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EC%84%A4%EC%A0%95.png" width="80%" height="60%" ><br><br>
 초기 공장 설정을 나타낸 것이다.
 <img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/MQTT.png" width="80%" height="60%" ><br> 
+MQTT화면을 윈폼으로 구성한 것이다.
+<img src="https://github.com/ochestra365/MiniProject_SimpleMRP/blob/main/MRPApp/MRPApp/%EA%B9%83%EC%97%90%20%EC%98%AC%EB%A6%B4%20%EC%82%AC%EC%A7%84/%EB%A6%AC%ED%8F%AC%ED%8A%B8%EC%82%AC%EC%A7%84.png" width="80%" height="60%" ><br> 
 MQTT화면을 윈폼으로 구성한 것이다.
 ##4. DB
 -------------
