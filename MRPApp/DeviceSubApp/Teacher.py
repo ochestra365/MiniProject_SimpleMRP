@@ -44,7 +44,6 @@ GPIO.setwarnings(False)
 def read_value(a2,a3):
     GPIO.output(s2,a2)
     GPIO.output(s3,a3)
-    time.sleep(0.3)
     # 전체주기 웨이팅
     #GPIO.wait_for_edge(out,GPIO.FALLING)
     #GPIO.wait_for_edge(out,GPIO.RISING)

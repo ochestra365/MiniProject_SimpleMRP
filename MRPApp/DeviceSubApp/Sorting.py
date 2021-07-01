@@ -13,7 +13,7 @@ pub_topic='factory1/machine1/data'
 
 #핀설정
 Conveyor2=2
-Motor16=16
+Motor19=19
 s2=23
 s3=24
 out=25
@@ -43,7 +43,7 @@ pub_topic='factory1/machine1/data'
 def setup():
 	GPIO.setwarnings(False)
 	GPIO.setmode(GPIO.BCM)
-	GPIO.setup(Motor16,GPIO.OUT)
+	GPIO.setup(Motor19,GPIO.OUT)
 	GPIO.setup(Conveyor2,GPIO.OUT)
 	GPIO.setup(s2,GPIO.OUT)
 	GPIO.setup(s3,GPIO.OUT)
@@ -130,7 +130,7 @@ if(__name__=='__main__'):
 #	send_data('CONN',None,None,None)
 	try:
 		setup()
-		p=GPIO.PWM(Motor16,50)
+		p=GPIO.PWM(Motor19,50)
 		p.start(5)
 		Conveyor_GO()
 		loop()

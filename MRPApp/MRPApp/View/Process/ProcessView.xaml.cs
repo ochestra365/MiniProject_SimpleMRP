@@ -230,8 +230,8 @@ namespace MRPApp.View.Process
 
             LBlPrcOKAmount.Content = $"{prcOKAmount}개";
             LBlPrcFailAmount.Content = $"{prcFailAmount}개";
-            LBlPrcOKAmount.Content = $"{prcOkRate}개";
-            LBlPrcFailAmount.Content = $"{prcFailRate}개";
+            LBlPrcOKAmount.Content = $"{prcOkRate.ToString("#.##")}%";
+            LBlPrcFailAmount.Content = $"{prcFailRate.ToString("#.##")}%";
         }
         private void StartAnimation()
         {
