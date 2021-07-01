@@ -36,8 +36,8 @@ namespace MRPApp.View.Report
             int[] schAmount = list.Select(a => (int)a.SchAmount).ToArray();
             int[] prcOkAmounts = list.Select(a => (int)a.PrcOKAmount).ToArray();
             int[] prcFailAmounts = list.Select(a => (int)a.PrcFailAmount).ToArray();
-            var series1 = new LiveCharts.Wpf.ColumnSeries { Title="계획수량",Fill= new SolidColorBrush(Colors.Green), Values=new LiveCharts.ChartValues<int>(schAmount) };
-            var series2 = new LiveCharts.Wpf.ColumnSeries { Title="성공수량",  Fill = new SolidColorBrush(Colors.Blue), Values =new LiveCharts.ChartValues<int>(prcOkAmounts) };
+            var series1 = new LiveCharts.Wpf.ColumnSeries { Title="계획수량",Fill= new SolidColorBrush(Colors.Blue), Values=new LiveCharts.ChartValues<int>(schAmount) };
+            var series2 = new LiveCharts.Wpf.ColumnSeries { Title="성공수량",  Fill = new SolidColorBrush(Colors.Green), Values =new LiveCharts.ChartValues<int>(prcOkAmounts) };
             var series3 = new LiveCharts.Wpf.ColumnSeries { Title= "실패수량",  Fill = new SolidColorBrush(Colors.Red), Values =new LiveCharts.ChartValues<int>(prcFailAmounts) };
             //차트할당
             ChtReport.Series.Clear();
