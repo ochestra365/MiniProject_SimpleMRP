@@ -531,7 +531,7 @@
       <LastGenOutput>MRPModel.cs</LastGenOutput>
     </Content>
     <Content Include="MRP 리포트 쿼리.sql" />
-    <Content Include="전체 데이터베이스.sql" />
+    <Content Include="나의 데이터베이스.sql" />
     <Resource Include="깃에 올릴 사진\리포트사진.png" />
     <Resource Include="깃에 올릴 사진\프로세스 KILL.png" />
     <Resource Include="깃에 올릴 사진\다이어그램.png" />
